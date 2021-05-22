@@ -2,9 +2,6 @@ import React,{useEffect, useState} from 'react'
 import { useParams } from 'react-router'
 import {GetVideo} from '../api/gift'
 import {getCompanyIntro} from '../api/company'
-import Carousel from 'react-bootstrap/Carousel'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Slideshow from "../components/Slideshow";
 
 
 export default function View(prop){
@@ -52,6 +49,7 @@ export default function View(prop){
             <div className="container space-1 space-lg-2">
                 <h1>公司資訊</h1>
                 <h3>{companyData?.farm_name}</h3>
+                <p>{companyData?.farm_address}</p>
                 <p>{companyData?.farm_intro}</p>
                 <p>{companyData?.farm_phone}</p>
                 <p>{companyData?.farm_video}</p>
