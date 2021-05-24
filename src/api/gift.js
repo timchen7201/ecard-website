@@ -2,7 +2,7 @@ import axios from "axios"
 import Constant from '../constants'
 
 const UploadGift=async (body)=>{
-    const {data}= await axios.post(`${Constant.SERVER_URL}/gift/CHIAWEI`, body )
+    const {data}= await axios.post(`${Constant.SERVER_URL}/chiawei`, body )
     return data
 }
 const FetchVideo = async(id)=>{
@@ -25,11 +25,20 @@ const FetchPreViewVideo = async(id)=>{
 const GetVideo = async(password)=>{
     console.log("------")
     try {
-        const {data} = await axios.post(`${Constant.SERVER_URL}/gift/getVideo`,{password:password})
+        const {data} = await axios.post(`${Constant.SERVER_URL}/chiawei/getVideo`,{password:password})
         console.log("video_url",data)
         return data
     } catch (error) {
         return Promise.reject(error)
+    }
+}
+
+const registerByXlsx= async (body)=>{
+    try {
+        const {data} = await axios.post(`${Constant.SERVER_URL}/chiawei/xlsx`,body)
+        return data
+    } catch (error) {
+        
     }
 }
 export{
@@ -37,4 +46,5 @@ export{
     FetchVideo,
     FetchPreViewVideo,
     GetVideo,
+    registerByXlsx,
 }
