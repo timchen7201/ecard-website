@@ -33,6 +33,16 @@ const GetVideo = async(password)=>{
     }
 }
 
+const GetText = async(password)=>{
+    try{
+        const {data} = await axios.post(`${Constant.SERVER_URL}/chiawei/getGiftText`,{password:password})
+        console.log("===",data)
+        return(data)
+    }catch (error) {
+        return Promise.reject(error)
+    }
+}
+
 const registerByXlsx= async (body)=>{
     try {
         const {data} = await axios.post(`${Constant.SERVER_URL}/chiawei/xlsx`,body)
@@ -46,5 +56,6 @@ export{
     FetchVideo,
     FetchPreViewVideo,
     GetVideo,
+    GetText,
     registerByXlsx,
 }

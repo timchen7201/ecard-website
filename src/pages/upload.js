@@ -19,6 +19,7 @@ export default function Upload(){
     const [giftVideo, setGiftVideo] = useState(null);
     const [giftVideoID, setGiftVideoID] = useState(null);
     const [giftVideoInfo, setGiftVideoInfo] = useState(null);
+    const [enable,setEnable] = useState(false);
     useEffect(() => {
         // initialization of step form
         $(".js-step-form").each(function () {
@@ -175,6 +176,7 @@ export default function Upload(){
                         const { fileId } = JSON.parse(response);
                         console.log("FFFFFileId",fileId)
                         setGiftVideoID(fileId);
+                        setEnable(true)
                       },
                     },
                     revert: (uniqueFileId, load, error) => {
@@ -205,7 +207,9 @@ export default function Upload(){
                   重新修改
                 </a>
                
-                <button
+                {
+                  enable?(
+                    <button
                   type="button"
                   className="btn btn-sm btn-primary transition-3d-hover"
                   data-hs-step-form-prev-options='{
@@ -214,6 +218,17 @@ export default function Upload(){
                 >
                   完成製作
                 </button>
+                  ):(<button
+                    type="button"
+                    className="btn btn-sm btn-primary transition-3d-hover"
+                    data-hs-step-form-prev-options='{
+                      "targetSelector": "#verticalSelectStepThree"}'
+                    onClick={handleSubmit}
+                    disabled
+                  >
+                    完成製作
+                  </button>)
+                }
                 
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
+import ReactPlayer from 'react-player'
 import { useParams } from 'react-router'
-import {GetVideo} from '../api/gift'
+import {GetVideo,GetText } from '../api/gift'
 import {getCompanyIntro} from '../api/company'
 
 
@@ -10,7 +11,7 @@ export default function View(prop){
     const [videoUrl,setVideoUrl]= useState()
     const [companyData,setCompanyData] = useState()
     const [farmPic, setFarmPic] = useState([]);
-
+    const [text,setText] = useState('')
     useEffect(() => {
         getCompanyIntro(62).then((data)=>{
             setCompanyData(data)
@@ -28,7 +29,9 @@ export default function View(prop){
                 console.log('none---')
             }else{
                 GetVideo(password).then((video_url)=>{setVideoUrl(video_url)})
-
+                GetText (password).then((gift_text)=>{
+                    console.log("000000")
+                    setText(gift_text)})
             }
         }
     },[password])
@@ -44,9 +47,17 @@ export default function View(prop){
     }
     
     return(
-        <div className="container">
-            <video src = {videoUrl} controls/>
-            <div className="container space-1 space-lg-2">
+        <div className="container mt-auto ">
+           <div className="row">
+                <div className="col-md-8">
+                    <ReactPlayer url={videoUrl} controls/>
+                </div>
+                <div className="col-md-4">
+                    <h2>賀詞</h2>
+                    <p>{text}</p>
+                </div>
+           </div>
+            <div className="space-1 space-lg-2">
                 <h1>公司資訊</h1>
                 <h3>{companyData?.farm_name}</h3>
                 <p>{companyData?.farm_address}</p>
