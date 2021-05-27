@@ -26,8 +26,9 @@ const GetVideo = async(password)=>{
     console.log("------")
     try {
         const {data} = await axios.post(`${Constant.SERVER_URL}/chiawei/getVideo`,{password:password})
-        console.log("video_url",data)
-        return data
+        const {standardDefinition} = data
+        console.log("video_url",standardDefinition)
+        return standardDefinition
     } catch (error) {
         return Promise.reject(error)
     }

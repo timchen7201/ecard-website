@@ -9,7 +9,6 @@ const getCompanyIntro=async(id)=>{
         }
     });
     const {items} =data
-    console.log("---",items)
     return items
 }
 export{
