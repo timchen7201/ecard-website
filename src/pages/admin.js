@@ -27,6 +27,7 @@ export default function Admin(){
                 if(r.length===0){
                     alert('something wrong')
                 }else{
+                    alert("上傳成功");
                     window.location.reload()
                 }
             })

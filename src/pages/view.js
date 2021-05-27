@@ -12,6 +12,7 @@ export default function View(prop){
     const [companyData,setCompanyData] = useState()
     const [farmPic, setFarmPic] = useState([]);
     const [text,setText] = useState('')
+    const [sender,setSender]=useState()
     useEffect(() => {
         getCompanyIntro(62).then((data)=>{
             setCompanyData(data)
@@ -29,9 +30,11 @@ export default function View(prop){
                 console.log('none---')
             }else{
                 GetVideo(password).then((video_url)=>{setVideoUrl(video_url)})
-                GetText (password).then((gift_text)=>{
-                    console.log("000000")
-                    setText(gift_text)})
+                GetText (password).then(({gift_text,gift_from})=>{
+                        setText(gift_text)
+                        setSender(gift_from)
+                    }
+                )
             }
         }
     },[password])
@@ -50,10 +53,10 @@ export default function View(prop){
         <div className="container mt-auto ">
            <div className="row">
                 <div className="col-md-8">
-                    <ReactPlayer url={videoUrl} controls/>
+                    <ReactPlayer url={videoUrl} playsinline={true} controls/>
                 </div>
                 <div className="col-md-4">
-                    <h2>賀詞</h2>
+                    <h2>來自{sender}的祝福</h2>
                     <p>{text}</p>
                 </div>
            </div>
