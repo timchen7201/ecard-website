@@ -1,0 +1,79 @@
+.bigblue {
+    color: DodgerBlue;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+}
+
+.order-info-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+.oi-tab {
+    max-width: 800px;
+    width: 100%;
+    display: inline-block;
+}
+
+.custom-card {
+    text-align: left;
+}
+
+.oi-img-width {
+    max-width: 100%;
+    max-height: 200px;
+
+}
+
+img {
+    max-width: 100%;
+}
+
+.fruit-text {
+    text-align: left;
+    vertical-align: top;
+}
+
+.il-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-top: 3%;
+    text-align: center;
+    color: white;
+    background-color: rgb(255, 180, 95);
+}
+
+.il-img {
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.cf-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+.cf-form {
+    text-align: left;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.color-white {
+    color: white;
+}

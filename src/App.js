@@ -8,6 +8,9 @@ import {
 import Upload from './pages/upload'
 import View from './pages/view'
 import Entry from './pages/Entry'
+import SenderPage from './pages/SenderPage'
+import RecieverPage from './pages/RecieverPage'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -23,7 +26,12 @@ function App() {
           <Route exact path="/view/:password">
               <View/>
           </Route>
-        </Route>
+          <Route exact path="/sender">
+            <SenderPage/>
+          </Route>
+          <Route exact path="/reciever">
+            <RecieverPage/>
+          </Route></Route>
       </Switch>
     </Router>
    

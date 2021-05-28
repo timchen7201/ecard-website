@@ -1,0 +1,51 @@
+.ct1-canvas {
+    max-width: 600px;
+    width: 100%;
+    display: inline-block;
+}
+
+.ct1-card {
+    background-color: rgb(255, 174, 0);
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
+}
+
+.ct1-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.ct1-card-inner {
+    background-color: rgb(238, 240, 197);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 4%
+}
+
+.ct1-card-table {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.ct1-card-video {
+    width: 70%;
+    height: auto;
+}
+
+.ct1-left-td {
+    padding: 0%;
+}
+
+.ct1-right-td {
+    padding-right: 5%;
+}
