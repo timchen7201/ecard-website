@@ -25306,8 +25306,30 @@ video {
 }
 
 .hr-text {
-    height: 1.5px;
-    border: 0;
-    background-image: linear-gradient( to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-    /* box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5); */
+  height: 1.5px;
+  border: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0)
+  );
+  /* box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5); */
+}
+.dropzone {
+  text-align: center;
+  padding: 20px;
+  border: 3px dashed #eeeeee;
+  background-color: #fafafa;
+  color: #bdbdbd;
+
+  margin-bottom: 20px;
+}
+
+.accept {
+  border-color: #107c10 !important;
+}
+
+.reject {
+  border-color: #d83b01 !important;
 }

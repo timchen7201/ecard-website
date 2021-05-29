@@ -5,6 +5,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import Admin from './pages/admin'
 import Upload from './pages/upload'
 import View from './pages/view'
 import Entry from './pages/Entry'
@@ -17,6 +18,9 @@ function App() {
     <Router>
       <Switch>
         <Route path="/">
+          <Route exact path ="/admin">
+              <Admin/>
+          </Route>
           <Route exact path="/upload/:orderNumber">
             <Upload/>
           </Route>
@@ -31,7 +35,8 @@ function App() {
           </Route>
           <Route exact path="/reciever">
             <RecieverPage/>
-          </Route></Route>
+          </Route>
+        </Route>
       </Switch>
     </Router>
    

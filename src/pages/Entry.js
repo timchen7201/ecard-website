@@ -19,7 +19,7 @@ export default function Entry(){
           jump?(<Redirect to={`/view/${code}`}/>):(
             <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>請輸入密碼</Modal.Title>
+              <Modal.Title>請輸入禮物代碼</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <InputGroup size="sm" className="mb-3">
