@@ -1,0 +1,52 @@
+.gc-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+.ec-tb {
+    display: inline-block;
+}
+
+.ec-td-left {
+    max-width: 105px;
+    height: auto
+}
+
+.ec-td-right {
+    text-align: left;
+}
+
+.ec-tip-table-left {
+    max-width: 100px;
+    height: auto
+}
+
+.qm-img {
+    max-height: 21px;
+    max-width: 21px;
+}
+
+#button-tooltip>.tooltip-inner {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #062e56;
+}
+
+#button-tooltip>.tooltip-arrow {
+    border-top: 5px solid #062e56;
+}
+
+.card-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}

@@ -1,0 +1,33 @@
+.hd-brand-table {
+    width: 300px
+}
+
+.hd-brand-img {
+    max-height: 85px;
+}
+
+
+.hd-brand-text-1 {
+    color: rgb(100, 204, 4)
+}
+
+.hd-brand-text-2 {
+    color: rgb(255, 94, 0)
+}
+
+.order-info-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+
+.oi-tab {
+    max-width: 800px;
+    width: 100%;
+    display: inline-block;
+}

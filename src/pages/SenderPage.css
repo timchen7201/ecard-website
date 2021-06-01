@@ -5,39 +5,26 @@
     text-align: center;
 }
 
-.order-info-div {
-    margin: auto;
-    max-width: 1080px;
-    padding: 10px;
-    padding-bottom: 5%;
-    padding-top: 3%;
-    text-align: center;
-    background-color: rgb(255, 242, 231);
-}
-
-.oi-tab {
-    max-width: 800px;
-    width: 100%;
-    display: inline-block;
-}
-
 .custom-card {
     text-align: left;
 }
 
-.oi-img-width {
-    max-width: 100%;
-    max-height: 200px;
+.oi-table-img {
+    width: 40%
+}
 
+.oi-img {
+    max-width: 100%;
+    max-height: 150px;
 }
 
 img {
     max-width: 100%;
 }
 
-.fruit-text {
+.oi-table-text {
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .il-div {
@@ -53,8 +40,7 @@ img {
 .il-img {
     padding-top: 2%;
     padding-bottom: 5%;
-    padding-left: 5%;
-    padding-right: 5%;
+    max-height: 350px;
 }
 
 .cf-div {
@@ -74,6 +60,38 @@ img {
     margin-top: 20px;
 }
 
+.cf-buttons-div {
+    text-align: center;
+}
+
+.cf-greet-example {
+    float: left;
+}
+
+.sf-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 228, 226);
+}
+
+.sf-card-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 228, 226);
+}
+
 .color-white {
     color: white;
+}
+
+.sf-color {
+    color: rgb(180, 43, 2);
 }
