@@ -1,0 +1,108 @@
+.ct1-canvas {
+    max-width: 600px;
+    width: 100%;
+    display: inline-block;
+}
+
+.ct1-card {
+    background-color: rgb(255, 174, 0);
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
+}
+
+.ct1-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.ct1-card-inner {
+    background-color: rgb(238, 240, 197);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 4%
+}
+
+.ct1-card-table {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%
+}
+
+.ct1-card-video {
+    max-width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.ct1-left-td {
+    width: 50%
+}
+
+.ct1-right-td {
+    width: 50%;
+    padding-right: 5%;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 651px) {
+    .ct1-text-1 {
+        text-align: left;
+        color: rgb(128, 58, 12);
+
+    }
+
+    .ct1-text-2 {
+        white-space: pre-wrap;
+        color: rgb(236, 89, 3)
+    }
+
+    .ct1-text-3 {
+        text-align: right;
+        color: rgb(128, 58, 12);
+    }
+
+
+    .ct1-gtext {
+        white-space: pre-wrap;
+        color: rgb(158, 37, 0);
+        font-size: 20px;
+    }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 650px) {
+    .ct1-text-1 {
+        text-align: left;
+        font-size: 5vw;
+        color: rgb(128, 58, 12);
+    }
+
+    .ct1-text-2 {
+        white-space: pre-wrap;
+        font-size: 5vw;
+        color: rgb(236, 89, 3)
+    }
+
+    .ct1-text-3 {
+        text-align: right;
+        font-size: 5vw;
+        color: rgb(128, 58, 12);
+    }
+
+
+    .ct1-gtext {
+        white-space: pre-wrap;
+        font-size: 3vw;
+        color: rgb(158, 37, 0);
+    }
+}

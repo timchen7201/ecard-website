@@ -1,0 +1,97 @@
+.bigblue {
+    color: DodgerBlue;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+}
+
+.custom-card {
+    text-align: left;
+}
+
+.oi-table-img {
+    width: 40%
+}
+
+.oi-img {
+    max-width: 100%;
+    max-height: 150px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.oi-table-text {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.il-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-top: 3%;
+    text-align: center;
+    color: white;
+    background-color: rgb(255, 180, 95);
+}
+
+.il-img {
+    padding-top: 2%;
+    padding-bottom: 5%;
+    max-height: 350px;
+}
+
+.cf-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+.cf-form {
+    text-align: left;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.cf-buttons-div {
+    text-align: center;
+}
+
+.cf-greet-example {
+    float: left;
+}
+
+.sf-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 228, 226);
+}
+
+.sf-card-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 228, 226);
+}
+
+.color-white {
+    color: white;
+}
+
+.sf-color {
+    color: rgb(180, 43, 2);
+}

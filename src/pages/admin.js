@@ -1,12 +1,14 @@
-import { Button } from 'react-bootstrap'
-import React, {useState} from 'react'
+import { Button,ButtonGroup } from 'react-bootstrap'
+import React, {useState,useContext} from 'react'
 import Dropzone from 'react-dropzone-uploader'
 import 'react-dropzone-uploader/dist/styles.css'
 import axios from 'axios'
 import {registerByXlsx} from '../api/gift'
+import {AuthContext} from '../appContext'
 
 export default function Admin(){
     const [xlsxFile,setXlsxFile] = useState([])
+    const { authState, authDispatch } = useContext(AuthContext);
     const handleXlsxChange = ({ meta, file }, status) => { 
         console.log("cfile",file)
         if(status==="removed"){
@@ -36,6 +38,24 @@ export default function Admin(){
     }
     return(
         <div className="container">
+            {
+                authState?.user?(
+                    <div className="mt-3">
+                        <h2>
+                            {authState.user}
+                        </h2>
+                        <div className="float-right row " >
+                            <ButtonGroup aria-label="Basic example">
+                                <Button variant="light" onClick={()=>{
+                                    authDispatch({
+                                        type: "LOGOUT",
+                                      })
+                                }}>登出</Button>
+                            </ButtonGroup>         
+                        </div>
+                    </div>
+                ):(null)
+            }
             <div className="">
             <Dropzone
                        // getUploadParams={getUploadParams}
