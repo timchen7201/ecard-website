@@ -1,0 +1,15 @@
+.ul-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+.ul-dz {
+    max-width: 600px;
+    width: 100%;
+    display: inline-block;
+}
