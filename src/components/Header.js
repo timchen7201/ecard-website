@@ -1,6 +1,7 @@
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-scroll";
 import "./Header.css";
+import { Button } from "react-bootstrap";
 
 export default function Header(props) {
   return (
@@ -51,6 +52,11 @@ export default function Header(props) {
             })}
         </Nav>
       </Navbar.Collapse>
+      {props.logOutEvent && (
+        <Button size="sm" variant="secondary" onClick={props.logOutEvent}>
+          登出
+        </Button>
+      )}
     </Navbar>
   );
 }
