@@ -41,11 +41,11 @@ export default function Admin(){
             {
                 authState?.user?(
                     <div className="mt-3">
-                        <h2>
-                            {authState.user}
-                        </h2>
-                        <div className="float-right row " >
-                            <ButtonGroup aria-label="Basic example">
+                        <h3>
+                           {authState.user}
+                        </h3>
+                        <div className="float-right row mr-1 mb-3" >
+                            <ButtonGroup aria-label="Basic example" className="ml-2">
                                 <Button variant="light" onClick={()=>{
                                     authDispatch({
                                         type: "LOGOUT",

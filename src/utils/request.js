@@ -1,8 +1,8 @@
 import axios from "axios";
 import {} from "../appContext";
+import Constant from '../constants'
 // Modify server url here
-//baseURL:"http://localhost:4000"
-const baseURL = "http://localhost:4000";
+const baseURL = Constant.SERVER_URL
 // const baseURL = "https://app.freshio.me";
 const request = axios.create({ baseURL: baseURL });
 
