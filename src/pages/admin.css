@@ -13,3 +13,18 @@
     width: 100%;
     display: inline-block;
 }
+
+.sq-div {
+    margin: auto;
+    max-width: 1080px;
+    padding: 10px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    text-align: center;
+    background-color: rgb(255, 242, 231);
+}
+
+.sq-table {
+    max-width: 800px;
+    display: inline-block;
+}

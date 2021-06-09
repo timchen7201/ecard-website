@@ -65,7 +65,7 @@ export default function Login(prop) {
     <main id="content" role="main" className="main">
       <Header menu={null}></Header>
 
-      <div className="container py-5 py-sm-7">
+      <div className="container py-5 py-sm-7 lg-div">
         <div className="row justify-content-center">
           <div className="col-md-7 col-lg-5">
             <div className="card card-lg mb-5">
