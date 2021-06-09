@@ -126,7 +126,7 @@ function CardForm(props) {
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>回禮感謝影片上傳</Form.Label>
+          <Form.Label>回禮感謝影片拍攝及上傳</Form.Label>
           <br />
           <input
             type="file"

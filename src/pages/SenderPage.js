@@ -75,7 +75,7 @@ function OrderInfo(props) {
         <b>訂單資訊</b>
       </h2>
       <span className="oi-title">
-        以下是您訂購要送給 <b>{receiver}</b> 的禮品內容
+        以下是您訂購送給 <b>{receiver}</b> 的禮品內容
       </span>
       <br />
       <br />
@@ -318,7 +318,7 @@ function CardForm(props) {
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>祝賀影片上傳</Form.Label>
+          <Form.Label>祝賀影片拍攝及上傳</Form.Label>
           <br />
           <input
             type="file"
@@ -397,7 +397,7 @@ export default function SenderPage() {
   const [headerMenu, setHeaderMenu] = useState(null);
   const [viewNumber, setViewNumber] = useState(0);
   const [returnCardExist, setReturnCardExist] = useState(false);
-  const viewNumberThresh = 3;
+  const viewNumberThresh = 1;
 
   useEffect(() => {
     // Check if orderNumber is valid

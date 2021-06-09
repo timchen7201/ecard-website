@@ -17,7 +17,12 @@ export default function CardTemplate1(props) {
                     ></video>
                   ) : (
                     <p>
-                      <span>請錄製您的祝賀影片</span>
+                      {!props.returnCard && (
+                        <span>請錄製您的祝賀影片</span>
+                      )}
+                      {props.returnCard && (
+                        <span>請錄製您的感謝影片</span>
+                      )}
                       <br />
                       <span>，由下方表單上傳</span>
                     </p>
