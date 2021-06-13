@@ -1,18 +1,36 @@
 .hd-brand-table {
-    width: 300px
+    width: 320px;
+}
+
+.hd-img-col {
+    width: 65px
 }
 
 .hd-brand-img {
     max-height: 85px;
 }
 
+.hd-text-col {
+    word-wrap: break-word;
+}
+
 
 .hd-brand-text-1 {
-    color: rgb(100, 204, 4)
+    color: rgb(100, 204, 4);
 }
 
 .hd-brand-text-2 {
-    color: rgb(255, 94, 0)
+    color: rgb(255, 94, 0);
+}
+
+.hd-brand-text-1-jp {
+    color: rgb(100, 204, 4);
+    font-size: 80%;
+}
+
+.hd-brand-text-2-jp {
+    color: rgb(255, 94, 0);
+    font-size: 80%;
 }
 
 .order-info-div {

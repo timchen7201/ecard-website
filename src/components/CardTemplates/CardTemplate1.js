@@ -1,4 +1,5 @@
 import "./CardTemplate1.css";
+import { wording } from "../../wording";
 
 export default function CardTemplate1(props) {
   return (
@@ -18,29 +19,47 @@ export default function CardTemplate1(props) {
                   ) : (
                     <p>
                       {!props.returnCard && (
-                        <span>請錄製您的祝賀影片</span>
+                        <span>
+                          {wording[props.lang]["record-greet-vid-hint"]}
+                        </span>
                       )}
                       {props.returnCard && (
-                        <span>請錄製您的感謝影片</span>
+                        <span>
+                          {wording[props.lang]["record-thank-vid-hint"]}
+                        </span>
                       )}
                       <br />
-                      <span>，由下方表單上傳</span>
+                      <span>{wording[props.lang]["upload-below"]}</span>
                     </p>
                   )}
                 </td>
                 <td className="ct1-right-td">
-                  <h3 className="ct1-text-1">來自</h3>
-                  <h3 className="ct1-text-2">
-                    <b>{props.sender ? props.sender : "[送禮者]"}</b>
+                  <h3 className="ct1-text-1">
+                    {wording[props.lang]["gcard-from-part-1"]}
                   </h3>
-                  {!props.returnCard && <h3 className="ct1-text-3">的祝福</h3>}
-                  {props.returnCard && <h3 className="ct1-text-3">的感謝</h3>}
+                  <h3 className="ct1-text-2">
+                    <b>
+                      {props.sender
+                        ? props.sender
+                        : wording[props.lang]["sender"]}
+                    </b>
+                  </h3>
+                  {!props.returnCard && (
+                    <h3 className="ct1-text-3">
+                      {wording[props.lang]["gcard-from-part-2"]}
+                    </h3>
+                  )}
+                  {props.returnCard && (
+                    <h3 className="ct1-text-3">
+                      {wording[props.lang]["tcard-from-part-2"]}
+                    </h3>
+                  )}
                   <br />
                   <b>
                     <p className="ct1-gtext">
                       {props.greetText
                         ? props.greetText
-                        : "(範例)祝您身體健康" + "\n" + "萬事如意"}
+                        : wording[props.lang]["greet-content-example"]}
                     </p>
                   </b>
                 </td>

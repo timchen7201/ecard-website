@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useMediaQuery } from "react-responsive";
 import { itemProductsMap, detailDict } from "../api/gift";
+import { wording } from "../wording";
 
 function GiftDetail(props) {
   const responsive = {
@@ -30,7 +31,7 @@ function GiftDetail(props) {
     return null;
   }
 
-  const productInfo = detailDict[props.product];
+  const productInfo = detailDict[props.product][props.lang];
 
   function certificate(cts) {
     if (!cts || cts.length < 1) return null;
@@ -59,52 +60,68 @@ function GiftDetail(props) {
       <h4>
         <b>{productInfo.productName}</b>
       </h4>
-      {props.isWideScreen && (
-        <div>
-          <table className="gd-table">
-            <tr>
-              <td className="gd-table-img">
-                <img className="gd-img" src={productInfo.productPhoto}></img>
-              </td>
-              <td className="gd-table-text">
-                <p>{productInfo.productText}</p>
-              </td>
-            </tr>
-          </table>
-          <br />
-          <br />
-          <table className="gd-table">
-            <tr>
-              <td className="gd-table-text">
-                <h5>
-                  <b>{productInfo.farmName}</b>
-                </h5>
-                <p>{productInfo.farmText}</p>
-              </td>
-              <td className="gd-table-img">
-                <img className="gd-img" src={productInfo.farmPhoto}></img>
-              </td>
-            </tr>
-          </table>
-        </div>
-      )}
-
-      {!props.isWideScreen && (
-        <div>
-          <img className="gd-img" src={productInfo.productPhoto}></img>
+      {productInfo["media-info"] === "vid" && (
+        <div className="gd-jp-div">
+          <video className="gd-vid" controls>
+            <source
+              src="https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4"
+              type="video/mp4"
+            />
+          </video>
           <p className="gd-text">{productInfo.productText}</p>
-          <br />
-          <br />
-          <h5>
-            <b>{productInfo.farmName}</b>
-          </h5>
-          <p className="gd-text">{productInfo.farmText}</p>
-          <img className="gd-img" src={productInfo.farmPhoto}></img>
+        </div>
+      )}
+      {productInfo["media-info"] === "img" && (
+        <div>
+          {props.isWideScreen && (
+            <div>
+              <table className="gd-table">
+                <tr>
+                  <td className="gd-table-img">
+                    <img
+                      className="gd-img"
+                      src={productInfo.productPhoto}
+                    ></img>
+                  </td>
+                  <td className="gd-table-text">
+                    <p>{productInfo.productText}</p>
+                  </td>
+                </tr>
+              </table>
+              <br />
+              <br />
+              <table className="gd-table">
+                <tr>
+                  <td className="gd-table-text">
+                    <h5>
+                      <b>{productInfo.farmName}</b>
+                    </h5>
+                    <p>{productInfo.farmText}</p>
+                  </td>
+                  <td className="gd-table-img">
+                    <img className="gd-img" src={productInfo.farmPhoto}></img>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          )}
+
+          {!props.isWideScreen && (
+            <div>
+              <img className="gd-img" src={productInfo.productPhoto}></img>
+              <p className="gd-text">{productInfo.productText}</p>
+              <br />
+              <br />
+              <h5>
+                <b>{productInfo.farmName}</b>
+              </h5>
+              <p className="gd-text">{productInfo.farmText}</p>
+              <img className="gd-img" src={productInfo.farmPhoto}></img>
+            </div>
+          )}
         </div>
       )}
 
-      <br />
-      <br />
       {certificate(productInfo.certificates)}
     </div>
   );
@@ -150,7 +167,7 @@ export default function GiftInfo(props) {
   return (
     <div className="gi-div" id="gift-info">
       <h3>
-        <b>禮品介紹 & 區塊鏈溯源</b>
+        <b>{wording[props.lang]["gift-intro-and-blockchain"]}</b>
       </h3>
       <br />
       <div className="gi-cr-div">
@@ -170,7 +187,7 @@ export default function GiftInfo(props) {
                 <span className="gi-cr-item-helper"></span>
                 <img
                   className="gi-cr-item-img"
-                  src={detailDict[item].productPhoto}
+                  src={detailDict[item][props.lang].productPhoto}
                 ></img>
               </div>
             );
@@ -186,6 +203,7 @@ export default function GiftInfo(props) {
             show={index === selectedPIndex}
             product={item}
             isWideScreen={isWideScreen}
+            lang={props.lang}
           ></GiftDetail>
         );
       })}

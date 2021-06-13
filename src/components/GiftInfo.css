@@ -73,3 +73,9 @@
     max-width: 250px;
     vertical-align: middle;
 }
+
+.gd-jp-div {
+    max-width: 700px;
+    width: 100%;
+    display: inline-block;
+}

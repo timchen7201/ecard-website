@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { wording } from "../wording";
 
 import {
   IsOrderNumberValid,
@@ -42,7 +43,7 @@ function OrderInfo(props) {
 
   const receiver = props.orderInfo.receiver
     ? props.orderInfo.receiver
-    : "收禮者";
+    : wording[props.lang]["receiver"];
   const products =
     props.orderInfo.products && props.orderInfo.products.length != 0
       ? props.orderInfo.products
@@ -51,7 +52,7 @@ function OrderInfo(props) {
   function certificate(cts) {
     if (!cts || cts.length < 1) return null;
     return (
-      <Tab eventKey="certificates" title="檢驗證書">
+      <Tab eventKey="certificates" title={wording[props.lang]["certificate"]}>
         <table>
           <tbody>
             <tr>
@@ -72,10 +73,11 @@ function OrderInfo(props) {
   return (
     <div className="order-info-div" id="orderInfo">
       <h2 className="oi-title">
-        <b>訂單資訊</b>
+        <b>{wording[props.lang]["order-info"]}</b>
       </h2>
       <span className="oi-title">
-        以下是您訂購送給 <b>{receiver}</b> 的禮品內容
+        {wording[props.lang]["oi-explain-part-1"]} <b>{receiver}</b>{" "}
+        {wording[props.lang]["oi-explain-part-2"]}
       </span>
       <br />
       <br />
@@ -91,7 +93,7 @@ function OrderInfo(props) {
                       key={"list-item-" + (index + 1).toString()}
                       href={"#link" + (index + 1).toString()}
                     >
-                      {detailDict[item].productName}
+                      {detailDict[item][props.lang].productName}
                     </ListGroup.Item>
                   );
                 })}
@@ -106,47 +108,61 @@ function OrderInfo(props) {
                       key={"tab-pane-" + (index + 1).toString()}
                     >
                       <Tabs defaultActiveKey="intro">
-                        <Tab eventKey="intro" title="禮品介紹">
+                        <Tab
+                          eventKey="intro"
+                          title={wording[props.lang]["gift-intro"]}
+                        >
                           <table>
                             <tbody>
                               <tr>
                                 <td className="oi-table-img">
                                   <img
                                     className="oi-img"
-                                    src={detailDict[item].productPhoto}
+                                    src={
+                                      detailDict[item][props.lang].productPhoto
+                                    }
                                   ></img>
                                 </td>
                                 <td className="oi-table-text">
                                   <h4>
-                                    <b>{detailDict[item].productName}</b>
+                                    <b>
+                                      {detailDict[item][props.lang].productName}
+                                    </b>
                                   </h4>
-                                  <p>{detailDict[item].productText}</p>
+                                  <p>
+                                    {detailDict[item][props.lang].productText}
+                                  </p>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </Tab>
-                        <Tab eventKey="farm" title="農場資訊">
+                        <Tab
+                          eventKey="farm"
+                          title={wording[props.lang]["farm-info"]}
+                        >
                           <table>
                             <tbody>
                               <tr>
                                 <td className="oi-table-text">
                                   <h4>
-                                    <b>{detailDict[item].farmName}</b>
+                                    <b>
+                                      {detailDict[item][props.lang].farmName}
+                                    </b>
                                   </h4>
-                                  <p>{detailDict[item].farmText}</p>
+                                  <p>{detailDict[item][props.lang].farmText}</p>
                                 </td>
                                 <td className="oi-table-img">
                                   <img
                                     className="oi-img"
-                                    src={detailDict[item].farmPhoto}
+                                    src={detailDict[item][props.lang].farmPhoto}
                                   ></img>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </Tab>
-                        {certificate(detailDict[item].certificates)}
+                        {certificate(detailDict[item][props.lang].certificates)}
                       </Tabs>
                     </Tab.Pane>
                   );
@@ -164,16 +180,28 @@ function Illustration(props) {
   return (
     <div className="il-div" id="illust">
       <h2 className="color-white">
-        <b>禮重 ‧ 情意濃</b>
+        <b>{wording[props.lang]["illustration-title"]}</b>
       </h2>
-      <span>
-        錄製給 <b>{props.receiver}</b> 的一段影音
-      </span>
-      <br />
-      <span>讓他/她可以透過掃描禮盒上的QR Code</span>
-      <br />
-      <span>看見、聽見你的祝福</span>
-      <br />
+      {props.lang !== "jp" && (
+        <span>
+          {wording[props.lang]["il-explain-part-1"]} <b>{props.receiver}</b>{" "}
+          {wording[props.lang]["il-explain-part-2"]}
+          <br />
+          {wording[props.lang]["il-explain-part-3"]}
+          <br />
+          {wording[props.lang]["il-explain-part-4"]}
+          <br />
+        </span>
+      )}
+      {props.lang === "jp" && (
+        <span>
+          <b>{props.receiver}</b> {wording[props.lang]["il-explain-part-1"]}{" "}
+          <br />
+          <b>{props.receiver}</b> {wording[props.lang]["il-explain-part-2"]}
+          <br />
+          {wording[props.lang]["il-explain-part-3"]}
+        </span>
+      )}
       <img
         className="il-img"
         src={require("../img/illustration.png").default}
@@ -237,24 +265,26 @@ function CardForm(props) {
 
         confirmAlert({
           title:
-            "您製作給" +
-            (props.receiver ? props.receiver : "收禮者") +
-            "的賀卡已成功寄出！",
-          message: "是否預覽完稿頁面？",
+            wording[props.lang]["gcard-sent-part-1"] +
+            (props.receiver
+              ? props.receiver
+              : wording[props.lang]["receiver"]) +
+            wording[props.lang]["gcard-sent-part-2"],
+          message: wording[props.lang]["ask-for-preview"],
           buttons: [
             {
-              label: "是，開啟預覽頁",
+              label: wording[props.lang]["agree-preview"],
               onClick: () => window.open("/preview/" + props.orderNumber),
             },
             {
-              label: "否，留在本頁",
+              label: wording[props.lang]["refuse-preview"],
               onClick: () => {},
             },
           ],
         });
       })
       .catch((err) => {
-        alert("賀卡儲存失敗，請聯繫客服人員，謝謝！");
+        alert(wording[props.lang]["gcard-save-fail"]);
         console.error(err);
       });
   }
@@ -264,7 +294,7 @@ function CardForm(props) {
     const types = Object.keys(exampleGreets);
     return (
       <div className="cf-greet-example">
-        <span>套用範本</span>
+        <span>{wording[props.lang]["use-example"]}</span>
         {types.map((item, index) => {
           return (
             <span>
@@ -291,10 +321,14 @@ function CardForm(props) {
   return (
     <div className="cf-div" id="card">
       <h2>
-        <b>製作給 {props.receiver ? props.receiver : "收禮者"} 的賀卡</b>
+        <b>
+          {wording[props.lang]["make-gcard-part-1"]}{" "}
+          {props.receiver ? props.receiver : wording[props.lang]["receiver"]}{" "}
+          {wording[props.lang]["make-gcard-part-2"]}
+        </b>
       </h2>
       <br />
-      <h6>賀卡即時預覽</h6>
+      <h6>{wording[props.lang]["gcard-instant-preview"]}</h6>
       <CardTemplate1
         sender={sender}
         videoUrl={
@@ -304,40 +338,43 @@ function CardForm(props) {
         }
         greetText={greetText}
         returnCard={false}
+        lang={props.lang}
       ></CardTemplate1>
       <Form className="cf-form" onSubmit={submitHandler}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>送禮者署名</Form.Label>
+          <Form.Label>{wording[props.lang]["sender-name"]}</Form.Label>
           <Form.Control
             as="textarea"
             rows={2}
-            placeholder="如：商田公司 林啟森董事長"
+            placeholder={wording[props.lang]["sender-name-example"]}
             defaultValue={sender}
             onChange={senderHandelChange}
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>祝賀影片拍攝及上傳</Form.Label>
+          <Form.Label>{wording[props.lang]["upload-greet-vid"]}</Form.Label>
           <br />
           <input
             type="file"
             accept=".mp4"
-            capture
+            capture="user"
             onChange={videoHandelChange}
           ></input>
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
-          {uploadProgress === 100 && <p>影片上傳完成！請於上方即時預覽</p>}
+          {uploadProgress === 100 && (
+            <p>{wording[props.lang]["upload-vid-complete"]}</p>
+          )}
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>祝賀內容</Form.Label>
+          <Form.Label>{wording[props.lang]["greet-content"]}</Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
-            placeholder="如：祝您身體健康、萬事如意"
+            placeholder={wording[props.lang]["greet-content-example"]}
             defaultValue={greetText}
             onChange={greetTextHandelChange}
             value={greetText}
@@ -348,7 +385,7 @@ function CardForm(props) {
         <br />
         <div className="cf-buttons-div">
           <Button variant="success" type="submit">
-            儲存並寄出
+            {wording[props.lang]["save-and-send"]}
           </Button>
         </div>
       </Form>
@@ -367,10 +404,17 @@ function ShowFeedback(props) {
   return (
     <div className="sf-div" id="receiver-feedback">
       <h3 className="sf-color">
-        <b>太好了！ {props.receiver} 已收到您的禮物</b>
+        <b>
+          {wording[props.lang]["received-notification-part-1"]} {props.receiver}{" "}
+          {wording[props.lang]["received-notification-part-2"]}
+        </b>
       </h3>
       <h3 className="sf-color">
-        <b>並觀看了您的祝福賀卡 {props.viewNumber} 次</b>
+        <b>
+          {wording[props.lang]["received-notification-part-3"]}{" "}
+          {props.viewNumber}{" "}
+          {wording[props.lang]["received-notification-part-4"]}
+        </b>
       </h3>
       <br />
       {props.returnCardExist && (
@@ -380,6 +424,7 @@ function ShowFeedback(props) {
             videoUrl={videoUrl}
             greetText={props.greetText}
             returnCard={true}
+            lang={props.lang}
           ></CardTemplate1>
         </div>
       )}
@@ -387,7 +432,7 @@ function ShowFeedback(props) {
   );
 }
 
-export default function SenderPage() {
+export default function SenderPage(props) {
   const { orderNumber } = useParams(); // main KEY in url
   const [isONValid, setIsONValid] = useState(false);
   const [orderInfo, setOrderInfo] = useState(null);
@@ -397,14 +442,14 @@ export default function SenderPage() {
   const [headerMenu, setHeaderMenu] = useState(null);
   const [viewNumber, setViewNumber] = useState(0);
   const [returnCardExist, setReturnCardExist] = useState(false);
-  const viewNumberThresh = 1;
+  const viewNumberThresh = 99999999;
 
   useEffect(() => {
     // Check if orderNumber is valid
     IsOrderNumberValid(orderNumber).then((valid) => {
       setIsONValid(valid);
       if (!valid) {
-        alert("系統查無您的訂單，請聯繫客服。");
+        alert(wording[props.lang]["order-not-found"]);
       } else {
         // Get Order Info
         GetOrderInfo(orderNumber)
@@ -464,29 +509,54 @@ export default function SenderPage() {
   useEffect(() => {
     if (viewNumber < viewNumberThresh) {
       setHeaderMenu([
-        { name: "訂單資訊", id: "orderInfo", show: isONValid },
-        { name: "禮重 ‧ 情意濃", id: "illust", show: true },
-        { name: "製作賀卡", id: "card", show: isONValid },
-        { name: "品牌介紹", id: "brand", show: true },
+        {
+          name: wording[props.lang]["order-info"],
+          id: "orderInfo",
+          show: isONValid,
+        },
+        {
+          name: wording[props.lang]["illustration-title"],
+          id: "illust",
+          show: true,
+        },
+        {
+          name: wording[props.lang]["make-gcard"],
+          id: "card",
+          show: isONValid,
+        },
+        { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
       ]);
     } else {
       setHeaderMenu([
-        { name: "收禮者回饋", id: "receiver-feedback", show: true },
-        { name: "訂單資訊", id: "orderInfo", show: isONValid },
-        { name: "品牌介紹", id: "brand", show: true },
+        {
+          name: wording[props.lang]["receiver-feedback"],
+          id: "receiver-feedback",
+          show: true,
+        },
+        {
+          name: wording[props.lang]["order-info"],
+          id: "orderInfo",
+          show: isONValid,
+        },
+        { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
       ]);
     }
-  }, [isONValid, viewNumber]);
+  }, [isONValid, viewNumber, props.lang]);
 
   if (viewNumber < viewNumberThresh) {
     return (
       <div>
         <Header menu={headerMenu}></Header>
-        <OrderInfo show={isONValid} orderInfo={orderInfo}></OrderInfo>
+        <OrderInfo
+          show={isONValid}
+          orderInfo={orderInfo}
+          lang={props.lang}
+        ></OrderInfo>
         <Illustration
           receiver={
             orderInfo && orderInfo.receiver ? orderInfo.receiver : "收禮者"
           }
+          lang={props.lang}
         ></Illustration>
         <CardForm
           show={isONValid}
@@ -501,8 +571,9 @@ export default function SenderPage() {
           }
           videoInfo={videoInfo}
           greetText={greetText}
+          lang={props.lang}
         ></CardForm>
-        <BrandIntro></BrandIntro>
+        <BrandIntro lang={props.lang}></BrandIntro>
       </div>
     );
   } else {
@@ -518,9 +589,14 @@ export default function SenderPage() {
           sender={sender}
           videoInfo={videoInfo}
           greetText={greetText}
+          lang={props.lang}
         ></ShowFeedback>
-        <OrderInfo show={isONValid} orderInfo={orderInfo}></OrderInfo>
-        <BrandIntro></BrandIntro>
+        <OrderInfo
+          show={isONValid}
+          orderInfo={orderInfo}
+          lang={props.lang}
+        ></OrderInfo>
+        <BrandIntro lang={props.lang}></BrandIntro>
       </div>
     );
   }

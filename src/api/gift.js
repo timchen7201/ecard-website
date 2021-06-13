@@ -226,44 +226,98 @@ const itemProductsMap = (item) => {
 
 const detailDict = {
   銷日芒果: {
-    productName: "龍蝦芒果",
-    productPhoto: require("../img/mango.jpeg").default,
-    productText:
-      "南方艷陽的沐浴下 屏東縣吃龍蝦長大的愛文芒果們果皮更鮮紅、果肉更香甜。",
-    farmName: "台鼎龍蝦芒果農場",
-    farmPhoto: require("../img/mango-farm.jpg").default,
-    farmText:
-      "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
-    certificates: [
-      require("../img/certificate.jpg").default,
-      require("../img/certificate.jpg").default,
-      require("../img/certificate.jpg").default,
-    ],
+    "zh-tw": {
+      productName: "龍蝦芒果",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4",
+      productPhoto: require("../img/mango.jpg").default,
+      productText:
+        "芒果屬熱帶水果,喜愛高溫、陽光充足的環境。而屏東位於台灣的最南端,氣候上屬熱帶季風氣候,因地理位置靠海,位於北緯2240度,三面環海:東靠太平洋、南接巴士海峽、西鄰臺灣海峽,又有黑潮經過,有大量海鮮出產,也是養殖漁 業重鎮,因此使用龍蝦殼經菌肥分解成甲殼素及鈣 後,有效提供芒果栽培應用。由土壤吸收及葉面施肥,加上陽光充足又有 海風的吹拂,有利於芒果的生長結果,因此種出來 的芒果外觀鮮紅亮麗,果肉經吸收充足的甲殼素與 鈣,果肉扎實甜度高、風味濃郁。",
+      farmName: "台鼎龍蝦芒果農場",
+      farmPhoto: require("../img/mango-farm.jpg").default,
+      farmText:
+        "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
+      certificates: [],
+    },
+    jp: {
+      productName: "ロブスターマンゴ",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4",
+      productPhoto: require("../img/mango.jpg").default,
+      productText:
+        "マンゴーはトロピカルフルーツで、高温かつ日差しが十分に浴びれる場所を好みます。ロブスターマンゴーは台湾最南端の屏東で生産され、そこはマンゴーの成長に適した熱帯性気候であり、三面は海に囲まれ大量の海鮮が\
+        獲れて、養殖業の拠点でもある。ご当地のロブスターの殻を菌体肥料による分解を行い、キチン質とカルシウムにした後、マンゴー栽培の養分の一種にしました。\
+        ロブスターマンゴーは土及び葉っぱから肥を与え、十分な日差しを浴び、海風に吹かれ、成長に必要なエッセンスを吸収しています。\
+        最新のスマートハウス施設を採用し、マンゴーの成長に必要とした環境を自動的に確認しコントロールする。栄養豊富且つ美味しい輸出用\
+        マンゴーを作り出します。果肉はしっかりしていながら、繊維は細かく、香りは濃厚で色は鮮やかな赤、ジューシーで甘いのが特長です。\
+        最上質なロブスターマンゴーをピックアップし、航空便で日本へ送る。日本では専門の方が品質検査を行なった後、ヤマト運輸の冷蔵便で\
+        宅配。今年の夏は、親族知人に台湾の素晴らしい味を送られては、いかがでしょう。",
+      farmName: "台鼎龍蝦芒果農場",
+      farmPhoto: require("../img/mango-farm.jpg").default,
+      farmText:
+        "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
+      certificates: [],
+    },
   },
   銷日鳳梨: {
-    productName: "金鑽鳳梨",
-    productPhoto: require("../img/pineapple.jpg").default,
-    productText:
-      "「金鑽鳳梨」是台灣為人熟悉的品種，但其實台灣鳳梨有18個品種。而由於金鑽鳳梨酸甜平衡，纖維細小，產量穩定，因此備受追捧，台灣市面上接近9成均是金鑽鳳梨（台農17號）。",
-    farmName: "傑農合作農場",
-    farmPhoto: require("../img/pineapple-farm.jpeg").default,
-    farmText:
-      "傑農合作農場擁有30年多年果品輸日經驗，所產果品皆通過農藥檢定合格，秉持著讓費者能吃的安心為信念，推廣優質水果。",
-    certificates: [
-      require("../img/certificate.jpg").default,
-      require("../img/certificate.jpg").default,
-    ],
+    "zh-tw": {
+      productName: "金鑽鳳梨",
+      "media-info": "img",
+      productPhoto: require("../img/pineapple.jpg").default,
+      productText:
+        "「金鑽鳳梨」是台灣為人熟悉的品種，但其實台灣鳳梨有18個品種。而由於金鑽鳳梨酸甜平衡，纖維細小，產量穩定，因此備受追捧，台灣市面上接近9成均是金鑽鳳梨（台農17號）。",
+      farmName: "傑農合作農場",
+      farmPhoto: require("../img/pineapple-farm.jpeg").default,
+      farmText:
+        "傑農合作農場擁有30年多年果品輸日經驗，所產果品皆通過農藥檢定合格，秉持著讓費者能吃的安心為信念，推廣優質水果。",
+      certificates: [
+        require("../img/certificate.jpg").default,
+        require("../img/certificate.jpg").default,
+      ],
+    },
+    jp: {
+      productName: "金鑽鳳梨",
+      "media-info": "img",
+      productPhoto: require("../img/pineapple.jpg").default,
+      productText:
+        "「金鑽鳳梨」是台灣為人熟悉的品種，但其實台灣鳳梨有18個品種。而由於金鑽鳳梨酸甜平衡，纖維細小，產量穩定，因此備受追捧，台灣市面上接近9成均是金鑽鳳梨（台農17號）。",
+      farmName: "傑農合作農場",
+      farmPhoto: require("../img/pineapple-farm.jpeg").default,
+      farmText:
+        "傑農合作農場擁有30年多年果品輸日經驗，所產果品皆通過農藥檢定合格，秉持著讓費者能吃的安心為信念，推廣優質水果。",
+      certificates: [
+        require("../img/certificate.jpg").default,
+        require("../img/certificate.jpg").default,
+      ],
+    },
   },
   銷日荔枝: {
-    productName: "玉荷包荔枝",
-    productPhoto: require("../img/lychee.jpg").default,
-    productText:
-      "玉荷包是所有荔枝中最早熟之品種，而因果形如荷包，果肉如玉般而得名！具高焦核（果核扁小）、果肉多的特色，而且果肉Q而結實，多汁而甜度達20度以上，無論是果粒、品質、市價等級均居台灣現有荔枝品種之冠，可謂是真正的「妃子笑」珍貴品種！",
-    farmName: "方境合作社",
-    farmPhoto: require("../img/lychee-farm.jpg").default,
-    farmText:
-      "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
-    certificates: [require("../img/certificate.jpg").default],
+    "zh-tw": {
+      productName: "玉荷包荔枝",
+      "media-info": "img",
+      productPhoto: require("../img/lychee.jpg").default,
+      productText:
+        "玉荷包是所有荔枝中最早熟之品種，而因果形如荷包，果肉如玉般而得名！具高焦核（果核扁小）、果肉多的特色，而且果肉Q而結實，多汁而甜度達20度以上，無論是果粒、品質、市價等級均居台灣現有荔枝品種之冠，可謂是真正的「妃子笑」珍貴品種！",
+      farmName: "方境合作社",
+      farmPhoto: require("../img/lychee-farm.jpg").default,
+      farmText:
+        "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
+      certificates: [require("../img/certificate.jpg").default],
+    },
+    jp: {
+      productName: "玉荷包荔枝",
+      "media-info": "img",
+      productPhoto: require("../img/lychee.jpg").default,
+      productText:
+        "玉荷包是所有荔枝中最早熟之品種，而因果形如荷包，果肉如玉般而得名！具高焦核（果核扁小）、果肉多的特色，而且果肉Q而結實，多汁而甜度達20度以上，無論是果粒、品質、市價等級均居台灣現有荔枝品種之冠，可謂是真正的「妃子笑」珍貴品種！",
+      farmName: "方境合作社",
+      farmPhoto: require("../img/lychee-farm.jpg").default,
+      farmText:
+        "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
+      certificates: [require("../img/certificate.jpg").default],
+    },
   },
 };
 

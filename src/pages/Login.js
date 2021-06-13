@@ -5,7 +5,7 @@ import webSocket from "socket.io-client";
 import Header from "../components/Header";
 import BrandIntro from "../components/BrandIntro";
 
-export default function Login(prop) {
+export default function Login(props) {
   const { authDispatch } = useContext(AuthContext);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -156,7 +156,7 @@ export default function Login(prop) {
           </div>
         </div>
       </div>
-      <BrandIntro></BrandIntro>
+      <BrandIntro lang={props.lang}></BrandIntro>
     </main>
   );
 }

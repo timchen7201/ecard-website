@@ -1,8 +1,9 @@
 import "./BrandIntro.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { wording } from "../wording";
 
-export default function BrandIntro() {
+export default function BrandIntro(props) {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -26,7 +27,7 @@ export default function BrandIntro() {
   return (
     <div className="bi-div" id="brand">
       <h2 className="color-white">
-        <b>品牌介紹</b>
+        <b>{wording[props.lang]["brand-intro"]}</b>
       </h2>
       <br />
       <div className="bi-carousel">
@@ -42,16 +43,39 @@ export default function BrandIntro() {
                     ></img>
                   </td>
                   <td className="bi-td-right">
-                    <h4 className="color-white">清華大學高速網路研究室</h4>
-                    <p>
-                      研究領域：
-                      <br />
-                      人工智慧教育大數據 人工智慧物聯網 (AIoT)
-                      <br />
-                      智慧科技農業 農業區塊鏈服務平台
-                      <br />
-                      長距離低功耗物聯網無線網路 網路安全
-                    </p>
+                    <h4 className="color-white">
+                      {wording[props.lang]["nthu-hsnl"]}
+                    </h4>
+                    {props.lang !== "jp" && (
+                      <p>
+                        {wording[props.lang]["research-field"]}：
+                        <br />
+                        {wording[props.lang]["ai-edu"]}{" "}
+                        {wording[props.lang]["aiot"]}
+                        <br />
+                        {wording[props.lang]["smart-agri"]}{" "}
+                        {wording[props.lang]["agri-blockchain"]}
+                        <br />
+                        {wording[props.lang]["lora-wan"]}{" "}
+                        {wording[props.lang]["cyber-security"]}
+                      </p>
+                    )}
+                    {props.lang === "jp" && (
+                      <p>
+                        {wording[props.lang]["research-field"]}：
+                        <br />
+                        {wording[props.lang]["ai-edu"]}
+                        <br />
+                        {wording[props.lang]["aiot"]}
+                        <br />
+                        {wording[props.lang]["smart-agri"]}
+                        <br />
+                        {wording[props.lang]["agri-blockchain"]}{" "}
+                        {wording[props.lang]["cyber-security"]}
+                        <br />
+                        {wording[props.lang]["lora-wan"]}
+                      </p>
+                    )}
                   </td>
                 </tr>
               </tbody>
@@ -68,11 +92,10 @@ export default function BrandIntro() {
                     ></img>
                   </td>
                   <td className="bi-td-right">
-                    <h4 className="color-white">商田實業有限公司</h4>
-                    <p>
-                      商田實業有限公司是一家國際貿易公司，專門進口日本及其他國家的優質農產品。
-                      主要通路為台灣高級百貨公司及超級市場。
-                    </p>
+                    <h4 className="color-white">
+                      {wording[props.lang]["chia-wei"]}
+                    </h4>
+                    <p>{wording[props.lang]["chia-wei-intro"]}</p>
                   </td>
                 </tr>
               </tbody>

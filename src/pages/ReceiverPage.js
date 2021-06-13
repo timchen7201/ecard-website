@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import GreetCard from "../components/GreetCard";
 import GiftInfo from "../components/GiftInfo";
 import BrandIntro from "../components/BrandIntro";
+import { wording } from "../wording";
 
 import {
   IsPasswordValid,
@@ -77,13 +78,13 @@ function CardForm(props) {
       .then((response) => {
         console.log(response);
         alert(
-          "您給" +
-            (props.receiver ? props.receiver : "送禮者") +
-            "的回禮感謝卡已成功寄出！"
+          wording[props.lang]["send-tcard-succeed-part-1"] +
+            (props.receiver ? props.receiver : wording[props.lang]["sender"]) +
+            wording[props.lang]["send-tcard-succeed-part-2"]
         );
       })
       .catch((err) => {
-        alert("回禮感謝卡儲存失敗，請聯繫客服人員，謝謝！");
+        alert(wording[props.lang]["tcard-save-fail"]);
         console.error(err);
       });
   }
@@ -97,12 +98,14 @@ function CardForm(props) {
     <div className="cf-div" id="thanks-card">
       <h2>
         <b>
-          製作給 {props.receiver ? props.receiver : "送禮者"} 的<br />
-          回禮感謝卡
+          {wording[props.lang]["make-tcard-part-1"]}{" "}
+          {props.receiver ? props.receiver : wording[props.lang]["sender"]}{" "}
+          <br />
+          {wording[props.lang]["make-tcard-part-2"]}
         </b>
       </h2>
       <br />
-      <h6>感謝卡即時預覽</h6>
+      <h6>{wording[props.lang]["tcard-instant-preview"]}</h6>
       <CardTemplate1
         sender={sender}
         videoUrl={
@@ -112,55 +115,58 @@ function CardForm(props) {
         }
         greetText={greetText}
         returnCard={true}
+        lang={props.lang}
       ></CardTemplate1>
       <Form className="cf-form" onSubmit={submitHandler}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>回禮者署名</Form.Label>
+          <Form.Label>{wording[props.lang]["feedback-name"]}</Form.Label>
           <Form.Control
             as="textarea"
             rows={2}
-            placeholder="如：商田公司 林啟森董事長"
+            placeholder={wording[props.lang]["sender-name-example"]}
             defaultValue={sender}
             onChange={senderHandelChange}
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>回禮感謝影片拍攝及上傳</Form.Label>
+          <Form.Label>{wording[props.lang]["upload-thank-vid"]}</Form.Label>
           <br />
           <input
             type="file"
             accept=".mp4"
-            capture
+            capture="user"
             onChange={videoHandelChange}
           ></input>
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
-          {uploadProgress === 100 && <p>影片上傳完成！請於上方即時預覽</p>}
+          {uploadProgress === 100 && (
+            <p>{wording[props.lang]["upload-vid-complete"]}</p>
+          )}
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>回禮內容</Form.Label>
+          <Form.Label>{wording[props.lang]["thank-content"]}</Form.Label>
           <Button
             className="cf-ex-button"
             size="sm"
             variant="secondary"
             onClick={exambleOnclick}
           >
-            套用範本
+            {wording[props.lang]["use-example"]}
           </Button>
           <Form.Control
             as="textarea"
             rows={3}
-            placeholder="如：祝您身體健康、萬事如意"
+            placeholder={wording[props.lang]["greet-content-example"]}
             onChange={greetTextHandelChange}
             value={greetText}
           />
         </Form.Group>
         <div className="cf-buttons-div">
           <Button variant="success" type="submit">
-            儲存並寄出
+            {wording[props.lang]["save-and-send"]}
           </Button>
         </div>
       </Form>
@@ -168,7 +174,7 @@ function CardForm(props) {
   );
 }
 
-export default function ReceiverPage() {
+export default function ReceiverPage(props) {
   const { item } = useParams(); // main KEY in url
   const [orderInfo, setOrderInfo] = useState(null);
   const [password, SetPassword] = useState(null);
@@ -183,11 +189,11 @@ export default function ReceiverPage() {
 
   const pwEnterEvent = (pw) => {
     if (!pw) {
-      alert("請輸入簡訊禮物密碼");
+      alert(wording[props.lang]["enter-gift-code"]);
     } else {
       IsPasswordValid(pw).then((valid) => {
         if (!valid) {
-          alert("您輸入的禮物密碼有誤，請檢查後更正。");
+          alert(wording[props.lang]["enter-code-error"]);
         } else {
           // Get Greet Card Info.
           GetVideoInfo(pw)
@@ -231,20 +237,24 @@ export default function ReceiverPage() {
 
   useEffect(() => {
     setHeaderMenu([
-      { name: "觀看賀卡", id: "greet-card", show: true },
       {
-        name: "禮品介紹 & 區塊鏈溯源",
+        name: wording[props.lang]["watch-gcard"],
+        id: "greet-card",
+        show: true,
+      },
+      {
+        name: wording[props.lang]["gift-intro-and-blockchain"],
         id: "gift-info",
         show: itemProductsMap(item) ? true : false,
       },
       {
-        name: "製作回禮感謝卡",
+        name: wording[props.lang]["make-tcard"],
         id: "thanks-card",
-        show: password ? true : false,
+        show: false,
       },
-      { name: "品牌介紹", id: "brand", show: true },
+      { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
     ]);
-  }, [password]);
+  }, [password, props.lang]);
 
   return (
     <div>
@@ -256,10 +266,11 @@ export default function ReceiverPage() {
         videoInfo={videoInfo}
         greetText={greetText}
         preview={false}
+        lang={props.lang}
       ></GreetCard>
-      <GiftInfo item={item} orderInfo={orderInfo}></GiftInfo>
+      <GiftInfo item={item} orderInfo={orderInfo} lang={props.lang}></GiftInfo>
       <CardForm
-        show={password ? true : false}
+        show={false}
         password={password}
         receiver={sender}
         sender={
@@ -271,8 +282,9 @@ export default function ReceiverPage() {
         }
         videoInfo={returnVideoInfo}
         greetText={returnText}
+        lang={props.lang}
       ></CardForm>
-      <BrandIntro></BrandIntro>
+      <BrandIntro lang={props.lang}></BrandIntro>
     </div>
   );
 }

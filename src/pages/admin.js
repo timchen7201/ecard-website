@@ -44,7 +44,7 @@ function ShowQR(props) {
   );
 }
 
-export default function Admin() {
+export default function Admin(props) {
   const [uploaded, setUploaded] = useState(false);
   const { authState, authDispatch } = useContext(AuthContext);
 
@@ -128,7 +128,7 @@ export default function Admin() {
       <Header menu={null} logOutEvent={logOutEvent}></Header>
       {!uploaded && <UploadPanel></UploadPanel>}
       {uploaded && <ShowQR></ShowQR>}
-      <BrandIntro></BrandIntro>
+      <BrandIntro lang={props.lang}></BrandIntro>
     </div>
   );
 }
