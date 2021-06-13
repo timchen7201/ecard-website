@@ -241,7 +241,7 @@ const detailDict = {
       certificates: [],
     },
     jp: {
-      productName: "ロブスターマンゴ",
+      productName: "ロブスターマンゴー",
       "media-info": "vid",
       "vid-link":
         "https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4",
