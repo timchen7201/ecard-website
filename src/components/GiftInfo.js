@@ -37,8 +37,9 @@ function GiftDetail(props) {
     if (!cts || cts.length < 1) return null;
     return (
       <div>
+        <br />
         <h5>
-          <b>檢驗證書</b>
+          <b>{wording[props.lang]["certificate"]}</b>
         </h5>
         <div className="gd-cr-div">
           <Carousel responsive={responsive}>
@@ -170,30 +171,40 @@ export default function GiftInfo(props) {
         <b>{wording[props.lang]["gift-intro-and-blockchain"]}</b>
       </h3>
       <br />
-      <div className="gi-cr-div">
-        <Carousel responsive={responsive}>
-          {products.map((item, index) => {
-            return (
-              <div
-                className={
-                  "gi-cr-item" +
-                  (index === selectedPIndex ? " item-selected" : "")
-                }
-                action
-                key={"list-item-" + (index + 1).toString()}
-                href={"#link" + (index + 1).toString()}
-                onClick={productOnClick.bind(null, index)}
-              >
-                <span className="gi-cr-item-helper"></span>
-                <img
-                  className="gi-cr-item-img"
-                  src={detailDict[item][props.lang].productPhoto}
-                ></img>
-              </div>
-            );
-          })}
-        </Carousel>
-      </div>
+      {products.length == 1 && (
+        <div className="gi-cr-div-for-one">
+          <img
+            className="gi-cr-item-img-for-one"
+            src={detailDict[products[0]][props.lang].productPhoto}
+          ></img>
+        </div>
+      )}
+      {products.length > 1 && (
+        <div className="gi-cr-div">
+          <Carousel responsive={responsive}>
+            {products.map((item, index) => {
+              return (
+                <div
+                  className={
+                    "gi-cr-item" +
+                    (index === selectedPIndex ? " item-selected" : "")
+                  }
+                  action
+                  key={"list-item-" + (index + 1).toString()}
+                  href={"#link" + (index + 1).toString()}
+                  onClick={productOnClick.bind(null, index)}
+                >
+                  <span className="gi-cr-item-helper"></span>
+                  <img
+                    className="gi-cr-item-img"
+                    src={detailDict[item][props.lang].productPhoto}
+                  ></img>
+                </div>
+              );
+            })}
+          </Carousel>
+        </div>
+      )}
       <br />
       <br />
       <br />

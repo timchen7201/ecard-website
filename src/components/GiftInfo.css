@@ -12,7 +12,6 @@
     max-width: 500px;
     display: inline-block;
     width: 100%;
-
 }
 
 .item-selected {
@@ -34,6 +33,17 @@
 .gi-cr-item-img {
     max-width: 138px;
     max-height: 138px;
+    vertical-align: middle;
+}
+
+.gi-cr-div-for-one {
+    max-width: 350px;
+    display: inline-block;
+}
+
+.gi-cr-item-img-for-one {
+    max-width: 100%;
+    height: auto;
     vertical-align: middle;
 }
 

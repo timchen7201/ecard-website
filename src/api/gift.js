@@ -238,7 +238,11 @@ const detailDict = {
       farmPhoto: require("../img/mango-farm.jpg").default,
       farmText:
         "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
-      certificates: [],
+      certificates: [
+        require("../img/mango-certificate-1.jpg").default,
+        require("../img/mango-certificate-2.jpg").default,
+        require("../img/mango-certificate-3.jpg").default,
+      ],
     },
     jp: {
       productName: "ロブスターマンゴー",
@@ -258,7 +262,11 @@ const detailDict = {
       farmPhoto: require("../img/mango-farm.jpg").default,
       farmText:
         "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
-      certificates: [],
+      certificates: [
+        require("../img/mango-certificate-1.jpg").default,
+        require("../img/mango-certificate-2.jpg").default,
+        require("../img/mango-certificate-3.jpg").default,
+      ],
     },
   },
   銷日鳳梨: {
