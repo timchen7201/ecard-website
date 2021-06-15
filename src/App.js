@@ -89,11 +89,19 @@ function App() {
     // Set language
     if (!cookies.lang) {
       var userLang = navigator.language || navigator.userLanguage;
-      if (userLang !== "zh-tw") {
-        userLang = "jp";
+      if (userLang) {
+        userLang = userLang.toLowerCase();
+        if (userLang.startsWith("zh")) {
+          userLang = "zh-tw";
+        } else {
+          userLang = "jp";
+        }
+        setCookie("lang", userLang, { path: "/" });
+        setLang(userLang);
+      } else {
+        setCookie("lang", "jp", { path: "/" });
+        setLang("jp");
       }
-      setCookie("lang", userLang, { path: "/" });
-      setLang(userLang);
     } else {
       setLang(cookies.lang);
     }
