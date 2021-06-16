@@ -2,10 +2,11 @@ import { Button, Spinner, ButtonGroup } from "react-bootstrap";
 import React, { useState, useContext, useEffect } from "react";
 import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
-import axios from "axios";
 import { registerByXlsx } from "../api/gift";
+import {fetchRecord} from '../api/admin';
 import { AuthContext } from "../appContext";
 import Header from "../components/Header";
+import { Table } from "react-bootstrap";
 import "./Admin.css";
 import BrandIntro from "../components/BrandIntro";
 
@@ -47,8 +48,12 @@ function ShowQR(props) {
 export default function Admin(props) {
   const [uploaded, setUploaded] = useState(false);
   const { authState, authDispatch } = useContext(AuthContext);
-
-  useEffect(() => {}, [uploaded]);
+  const [records, setRecords] = useState([])
+  useEffect(() => {
+    fetchRecord().then(data=>{
+      setRecords(data)
+    })
+  }, []);
 
   function UploadPanel() {
     const [xlsxFile, setXlsxFile] = useState([]);
@@ -91,7 +96,7 @@ export default function Admin(props) {
             // getUploadParams={getUploadParams}
             onChangeStatus={handleXlsxChange}
             // onSubmit={handleSubmit}
-            inputContent={<span>點擊上傳～</span>}
+            inputContent={<span>點擊上傳</span>}
             submitButtonContent={<span>上傳</span>}
             maxFiles={1}
             inputWithFilesContent={<span>增加檔案</span>}
@@ -111,6 +116,38 @@ export default function Admin(props) {
                 Loading...
               </Button>
             )}
+          </div>
+          <div className="mt-5">
+          <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>訂單編號</th>
+              <th>寄件人</th>
+              <th>寄件人電話</th>
+              <th>收件人</th>
+              <th>收件人電話</th>
+              <th>產品</th>
+              <th>影片簡訊</th>
+              <th>密碼簡訊</th>
+            </tr>
+          </thead>
+          <tbody>
+            {records.map(record => {
+              return (
+                <tr>
+                  <td>{record['orderNumber']}</td>
+                  <td>{record['sender']}</td>
+                  <td>{record['sender_phone']}</td>
+                  <td>{record['receiver']}</td>
+                  <td>{record['receiver_phone']}</td>
+                  <td>{record['products']}</td>
+                  <td>{record['sender_sid']?(<i class="fas fa-check"></i>):(<i class="far fa-times"></i>)}</td>
+                  <td>{record['receiver_sid']?(<i class="fas fa-check"></i>):(<i class="far fa-times"></i>)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
           </div>
         </div>
       </div>
