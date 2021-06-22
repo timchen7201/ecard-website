@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { wording } from "../wording";
-
+import {Modal} from 'react-bootstrap/'
 import {
   IsOrderNumberValid,
   GetPassword,
@@ -444,6 +444,12 @@ export default function SenderPage(props) {
   const [returnCardExist, setReturnCardExist] = useState(false);
   const viewNumberThresh = 99999999;
 
+  const [show, setShow] = useState(true);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
   useEffect(() => {
     // Check if orderNumber is valid
     IsOrderNumberValid(orderNumber).then((valid) => {
@@ -547,6 +553,28 @@ export default function SenderPage(props) {
     return (
       <div>
         <Header menu={headerMenu}></Header>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>隱私權政策聲明：</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>確認是否已得知以下規定：</p>
+            <ol>
+              <li>本公司為提供您配送服務，需收集、處理、利用您的顧客資料，並因執行配送需求將您的資料提供給相關協力廠商。</li>
+              <li>若您提供的資料不完整或錯誤，將導致本公司無法如期如質到貨，導致您的權益受損。</li>
+              <li>本公司得以利用您提供的資料以郵寄、電話或簡訊方式，提供本公司之行銷宣傳。</li>
+              <li>依個人資料保護法第三條.您可聯繫本公司行使相關權利。</li>
+            </ol>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>了解</Button>
+          </Modal.Footer>
+        </Modal>
         <OrderInfo
           show={isONValid}
           orderInfo={orderInfo}
