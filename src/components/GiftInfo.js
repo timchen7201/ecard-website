@@ -165,6 +165,19 @@ export default function GiftInfo(props) {
     return null;
   }
 
+  if (item === "pomelo") {
+    return (
+      <div id="pomelo-div">
+        <iframe
+          src="https://fresh-io.web.app/partner-invisible/yangpomelo"
+          id="pomelo-iframe"
+          scrolling="no"
+          frameBorder="0"
+        ></iframe>
+      </div>
+    );
+  }
+
   return (
     <div className="gi-div" id="gift-info">
       <h3>

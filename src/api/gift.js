@@ -219,6 +219,8 @@ const itemProductsMap = (item) => {
       return ["銷日鳳梨"];
     case "lychee":
       return ["銷日荔枝"];
+    case "pomelo":
+      return ["銷日文旦"];
     default:
       return null;
   }

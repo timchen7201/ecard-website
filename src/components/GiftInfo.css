@@ -89,3 +89,137 @@
     width: 100%;
     display: inline-block;
 }
+
+@media screen and (max-width: 321px) {
+    #pomelo-div {
+        margin: auto;
+        max-width: 1080px;
+        padding-top: 3150px;
+        text-align: center;
+        background-color: rgb(251, 255, 231);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #pomelo-iframe {
+        position: absolute;
+        top: -130px;
+        left: 0%;
+        bottom: 130%;
+        right: 100%;
+        width: 100%;
+        height: 130%
+    }
+}
+
+
+@media screen and (min-width: 321px) and (max-width: 361px) {
+    #pomelo-div {
+        margin: auto;
+        max-width: 1080px;
+        padding-top: 3260px;
+        text-align: center;
+        background-color: rgb(251, 255, 231);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #pomelo-iframe {
+        position: absolute;
+        top: -130px;
+        left: 0%;
+        bottom: 130%;
+        right: 100%;
+        width: 100%;
+        height: 130%
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 576px) {
+    #pomelo-div {
+        margin: auto;
+        max-width: 1080px;
+        padding-top: 3280px;
+        text-align: center;
+        background-color: rgb(251, 255, 231);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #pomelo-iframe {
+        position: absolute;
+        top: -130px;
+        left: 0%;
+        bottom: 130%;
+        right: 100%;
+        width: 100%;
+        height: 130%
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    #pomelo-div {
+        margin: auto;
+        max-width: 1080px;
+        padding-top: 2850px;
+        text-align: center;
+        background-color: rgb(251, 255, 231);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #pomelo-iframe {
+        position: absolute;
+        top: -130px;
+        left: 0%;
+        bottom: 130%;
+        right: 100%;
+        width: 100%;
+        height: 130%
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    #pomelo-div {
+        margin: auto;
+        max-width: 1080px;
+        padding-top: 2950px;
+        text-align: center;
+        background-color: rgb(251, 255, 231);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #pomelo-iframe {
+        position: absolute;
+        top: -130px;
+        left: 0%;
+        bottom: 130%;
+        right: 100%;
+        width: 100%;
+        height: 130%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #pomelo-div {
+        margin: auto;
+        max-width: 1080px;
+        padding-top: 2950px;
+        text-align: center;
+        background-color: rgb(251, 255, 231);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #pomelo-iframe {
+        position: absolute;
+        top: -180px;
+        left: 0%;
+        bottom: 130%;
+        right: 100%;
+        width: 100%;
+        height: 130%;
+    }
+
+}
