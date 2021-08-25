@@ -13,7 +13,7 @@ function EnterCode(props) {
       <table>
         <tr>
           <td className="ec-tip-table-left">
-            <img src={require("../img/sms-icon.png").default}></img>
+            <img src={require("../img/sms-icon.png").default} alt=""></img>
           </td>
           <td>
             <span>{wording[props.lang]["sms-hint-part-1"]}</span>
@@ -42,7 +42,7 @@ function EnterCode(props) {
     <table className="ec-tb">
       <tr>
         <td className="ec-td-left">
-          <img src={require("../img/card-icon.png").default}></img>
+          <img src={require("../img/card-icon.png").default} alt=""></img>
         </td>
         <td className="ec-td-right">
           <h6>
@@ -64,7 +64,7 @@ function EnterCode(props) {
               >
                 <img
                   className="qm-img"
-                  src={require("../img/questmark-icon.png").default}
+                  src={require("../img/questmark-icon.png").default} alt=""
                 ></img>
               </OverlayTrigger>
               <table>

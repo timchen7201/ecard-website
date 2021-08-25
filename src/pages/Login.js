@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../appContext";
 import { emailSignIn } from "../api/admin";
-import webSocket from "socket.io-client";
 import Header from "../components/Header";
 import BrandIntro from "../components/BrandIntro";
 

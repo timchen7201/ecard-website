@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useState, useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -105,7 +104,7 @@ function App() {
     } else {
       setLang(cookies.lang);
     }
-  });
+  }, [cookies.lang, setCookie]);
   useEffect(() => {}, [lang]);
 
   function changeLang(lang) {
@@ -145,10 +144,13 @@ function App() {
                 <SenderPage lang={lang} />
               </Route>
               <Route exact path="/receiver/:item">
-                <ReceiverPage lang={lang} />
+                <ReceiverPage lang={lang} domestic={false}/>
               </Route>
               <Route exact path="/preview/:orderNumber">
                 <PreviewPage lang={lang} />
+              </Route>
+              <Route exact path="/domestic/receiver/:item">
+                <ReceiverPage lang={lang} domestic={true} />
               </Route>
             </Route>
           </Switch>

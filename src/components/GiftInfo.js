@@ -46,7 +46,7 @@ function GiftDetail(props) {
             {cts.map((item, index) => {
               return (
                 <div className="gd-cr-item">
-                  <img src={item}></img>
+                  <img src={item} alt=""></img>
                 </div>
               );
             })}
@@ -63,11 +63,8 @@ function GiftDetail(props) {
       </h4>
       {productInfo["media-info"] === "vid" && (
         <div className="gd-jp-div">
-          <video className="gd-vid" controls>
-            <source
-              src="https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4"
-              type="video/mp4"
-            />
+          <video className="gd-vid" poster={productInfo["vid-poster"]} controls>
+            <source src={productInfo["vid-link"]} type="video/mp4" />
           </video>
           <p className="gd-text">{productInfo.productText}</p>
         </div>
@@ -82,6 +79,7 @@ function GiftDetail(props) {
                     <img
                       className="gd-img"
                       src={productInfo.productPhoto}
+                      alt=""
                     ></img>
                   </td>
                   <td className="gd-table-text">
@@ -100,7 +98,11 @@ function GiftDetail(props) {
                     <p>{productInfo.farmText}</p>
                   </td>
                   <td className="gd-table-img">
-                    <img className="gd-img" src={productInfo.farmPhoto}></img>
+                    <img
+                      className="gd-img"
+                      src={productInfo.farmPhoto}
+                      alt=""
+                    ></img>
                   </td>
                 </tr>
               </table>
@@ -109,7 +111,11 @@ function GiftDetail(props) {
 
           {!props.isWideScreen && (
             <div>
-              <img className="gd-img" src={productInfo.productPhoto}></img>
+              <img
+                className="gd-img"
+                src={productInfo.productPhoto}
+                alt=""
+              ></img>
               <p className="gd-text">{productInfo.productText}</p>
               <br />
               <br />
@@ -117,7 +123,7 @@ function GiftDetail(props) {
                 <b>{productInfo.farmName}</b>
               </h5>
               <p className="gd-text">{productInfo.farmText}</p>
-              <img className="gd-img" src={productInfo.farmPhoto}></img>
+              <img className="gd-img" src={productInfo.farmPhoto} alt=""></img>
             </div>
           )}
         </div>
@@ -165,6 +171,7 @@ export default function GiftInfo(props) {
     return null;
   }
 
+  /*
   if (item === "pomelo") {
     return (
       <div id="pomelo-div">
@@ -177,6 +184,7 @@ export default function GiftInfo(props) {
       </div>
     );
   }
+  */
 
   return (
     <div className="gi-div" id="gift-info">
@@ -184,12 +192,22 @@ export default function GiftInfo(props) {
         <b>{wording[props.lang]["gift-intro-and-blockchain"]}</b>
       </h3>
       <br />
-      {products.length == 1 && (
+      {products.length === 1 && (
         <div className="gi-cr-div-for-one">
-          <img
-            className="gi-cr-item-img-for-one"
-            src={detailDict[products[0]][props.lang].productPhoto}
-          ></img>
+          {props.domestic && (
+            <img
+              className="gi-cr-item-img-for-one"
+              src={require("../img/pomelo/pomelo(domestic).jpg").default}
+              alt=""
+            ></img>
+          )}
+          {!props.domestic && (
+            <img
+              className="gi-cr-item-img-for-one"
+              src={detailDict[products[0]][props.lang].productPhoto}
+              alt=""
+            ></img>
+          )}
         </div>
       )}
       {products.length > 1 && (
@@ -211,6 +229,7 @@ export default function GiftInfo(props) {
                   <img
                     className="gi-cr-item-img"
                     src={detailDict[item][props.lang].productPhoto}
+                    alt=""
                   ></img>
                 </div>
               );

@@ -13,8 +13,9 @@ export default function CardTemplate1(props) {
                   {props.videoUrl ? (
                     <video
                       className="ct1-card-video"
-                      src={props.videoUrl}
+                      src={props.videoUrl + "#t=0.1"}
                       controls
+                      preload="auto"
                     ></video>
                   ) : (
                     <p>

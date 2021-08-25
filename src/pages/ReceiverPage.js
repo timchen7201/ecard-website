@@ -7,6 +7,7 @@ import GreetCard from "../components/GreetCard";
 import GiftInfo from "../components/GiftInfo";
 import BrandIntro from "../components/BrandIntro";
 import { wording } from "../wording";
+import { AiFillCamera, AiFillFolderOpen } from "react-icons/ai";
 
 import {
   IsPasswordValid,
@@ -30,6 +31,7 @@ function CardForm(props) {
   const [videoInfo, setVideoInfo] = useState(null);
   const [greetText, setGreetText] = useState("");
   const [uploadProgress, setUploadProgress] = useState(null);
+  const hiddenFileInput = React.useRef(null);
 
   useEffect(() => {
     if (props.show) {
@@ -37,7 +39,7 @@ function CardForm(props) {
       if (props.videoInfo) setVideoInfo(props.videoInfo);
       if (props.greetText) setGreetText(props.greetText);
     }
-  }, [props.sender, props.videoInfo, props.greetText]);
+  }, [props.sender, props.videoInfo, props.greetText, props.show]);
 
   if (!props.show) {
     return null;
@@ -53,18 +55,23 @@ function CardForm(props) {
 
   function videoHandelChange(event) {
     let formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    VideoUploadInstance.post("", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress: (data) => {
-        //Set the progress value to show the progress bar
-        setUploadProgress(Math.round((100 * data.loaded) / data.total));
-      },
-    }).then((response) => {
-      setVideoInfo(response.data);
-    });
+    if (event.target.files.length > 0) {
+      console.log(event.target.files);
+      if (event.target.files[0].name.split(".").pop() === "mp4") {
+        formData.append("file", event.target.files[0]);
+        VideoUploadInstance.post("", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (data) => {
+            //Set the progress value to show the progress bar
+            setUploadProgress(Math.round((100 * data.loaded) / data.total));
+          },
+        }).then((response) => {
+          setVideoInfo(response.data);
+        });
+      } else alert("僅支援 .mp4 影片格式");
+    } else alert("檔案為空");
   }
 
   function submitHandler(event) {
@@ -92,6 +99,10 @@ function CardForm(props) {
   const exambleOnclick = () => {
     var items = gratitudeExamples;
     setGreetText(items[Math.floor(Math.random() * items.length)]);
+  };
+
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
   };
 
   return (
@@ -132,12 +143,30 @@ function CardForm(props) {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>{wording[props.lang]["upload-thank-vid"]}</Form.Label>
           <br />
+          <Button size="sm" variant="danger" onClick={handleClick}>
+            <AiFillCamera />
+            立即拍攝
+          </Button>
           <input
             type="file"
             accept=".mp4"
-            capture="user"
+            capture
+            ref={hiddenFileInput}
             onChange={videoHandelChange}
-          ></input>
+            style={{ display: "none" }}
+          />{" "}
+          或{" "}
+          <Button size="sm" variant="primary" onClick={handleClick}>
+            <AiFillFolderOpen />
+            選擇檔案
+          </Button>
+          <input
+            type="file"
+            accept=".mp4"
+            ref={hiddenFileInput}
+            onChange={videoHandelChange}
+            style={{ display: "none" }}
+          />
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
@@ -254,7 +283,7 @@ export default function ReceiverPage(props) {
       },
       { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
     ]);
-  }, [password, props.lang]);
+  }, [password, props.lang, item]);
 
   return (
     <div>
@@ -268,9 +297,14 @@ export default function ReceiverPage(props) {
         preview={false}
         lang={props.lang}
       ></GreetCard>
-      <GiftInfo item={item} orderInfo={orderInfo} lang={props.lang}></GiftInfo>
+      <GiftInfo
+        item={item}
+        orderInfo={orderInfo}
+        lang={props.lang}
+        domestic={props.domestic}
+      ></GiftInfo>
       <CardForm
-        show={false}
+        show={password ? true : false}
         password={password}
         receiver={sender}
         sender={

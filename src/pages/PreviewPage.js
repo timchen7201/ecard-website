@@ -14,7 +14,7 @@ import {
   GetVideoInfo,
 } from "../api/gift";
 
-export default function PreviewPage() {
+export default function PreviewPage(props) {
   const { orderNumber } = useParams(); // main KEY in url
   const [orderInfo, setOrderInfo] = useState(null);
   const [greetText, setGreetText] = useState(null);
@@ -52,7 +52,7 @@ export default function PreviewPage() {
           .catch((err) => console.error(err));
       }
     });
-  }, []);
+  }, [orderNumber]);
 
   const headerMenu = [
     { name: "觀看賀卡", id: "greet-card", show: true },
@@ -69,9 +69,10 @@ export default function PreviewPage() {
         videoInfo={videoInfo}
         greetText={greetText}
         preview={true}
+        lang={props.lang}
       ></GreetCard>
-      <GiftInfo item={null} orderInfo={orderInfo}></GiftInfo>
-      <BrandIntro></BrandIntro>
+      <GiftInfo item={null} orderInfo={orderInfo} lang={props.lang}></GiftInfo>
+      <BrandIntro lang={props.lang}></BrandIntro>
     </div>
   );
 }

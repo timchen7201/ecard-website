@@ -40,6 +40,7 @@ export default function BrandIntro(props) {
                     <img
                       className="bi-img"
                       src={require("../img/HSNL.png").default}
+                      alt=""
                     ></img>
                   </td>
                   <td className="bi-td-right">
@@ -89,6 +90,7 @@ export default function BrandIntro(props) {
                     <img
                       className="bi-img"
                       src={require("../img/chia-wei-front.jpg").default}
+                      alt=""
                     ></img>
                   </td>
                   <td className="bi-td-right">

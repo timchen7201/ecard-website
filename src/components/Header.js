@@ -15,7 +15,7 @@ export default function Header(props) {
                   <td className="hd-img-col">
                     <img
                       className="hd-brand-img"
-                      src={require("../img/logo.png").default}
+                      src={require("../img/logo.png").default} alt=""
                     ></img>
                   </td>
                   {lang !== "jp" && (
@@ -80,6 +80,7 @@ export default function Header(props) {
                       </Nav.Link>
                     );
                   }
+                  return null;
                 })}
               <NavDropdown title="Language" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={changeLang.bind(this, "zh-tw")}>

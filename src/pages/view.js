@@ -25,7 +25,7 @@ export default function View(prop){
     useEffect(()=>{
         
         if(password!=null){
-            if(password == "none"){
+            if(password === "none"){
                 setVideoUrl("")
                 console.log('none---')
             }else{

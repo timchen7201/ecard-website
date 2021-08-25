@@ -7,7 +7,8 @@ import Header from "../components/Header";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { wording } from "../wording";
-import {Modal} from 'react-bootstrap/'
+import { AiFillCamera, AiFillFolderOpen } from "react-icons/ai";
+import { Modal } from "react-bootstrap/";
 import {
   IsOrderNumberValid,
   GetPassword,
@@ -45,7 +46,7 @@ function OrderInfo(props) {
     ? props.orderInfo.receiver
     : wording[props.lang]["receiver"];
   const products =
-    props.orderInfo.products && props.orderInfo.products.length != 0
+    props.orderInfo.products && props.orderInfo.products.length !== 0
       ? props.orderInfo.products
       : ["銷日芒果", "銷日鳳梨", "銷日荔枝"];
 
@@ -59,7 +60,7 @@ function OrderInfo(props) {
               {cts.map((item, index) => {
                 return (
                   <td>
-                    <img className="oi-img" src={item}></img>
+                    <img className="oi-img" src={item} alt=""></img>
                   </td>
                 );
               })}
@@ -121,6 +122,7 @@ function OrderInfo(props) {
                                     src={
                                       detailDict[item][props.lang].productPhoto
                                     }
+                                    alt=""
                                   ></img>
                                 </td>
                                 <td className="oi-table-text">
@@ -156,6 +158,7 @@ function OrderInfo(props) {
                                   <img
                                     className="oi-img"
                                     src={detailDict[item][props.lang].farmPhoto}
+                                    alt=""
                                   ></img>
                                 </td>
                               </tr>
@@ -205,6 +208,7 @@ function Illustration(props) {
       <img
         className="il-img"
         src={require("../img/illustration.png").default}
+        alt=""
       ></img>
     </div>
   );
@@ -215,14 +219,14 @@ function CardForm(props) {
   const [videoInfo, setVideoInfo] = useState(null);
   const [greetText, setGreetText] = useState("");
   const [uploadProgress, setUploadProgress] = useState(null);
-
+  const hiddenFileInput = React.useRef(null);
   useEffect(() => {
     if (props.show) {
       if (props.sender) setSender(props.sender);
       if (props.videoInfo) setVideoInfo(props.videoInfo);
       if (props.greetText) setGreetText(props.greetText);
     }
-  }, [props.sender, props.videoInfo, props.greetText]);
+  }, [props.sender, props.videoInfo, props.greetText, props.show]);
 
   if (!props.show) {
     return null;
@@ -238,18 +242,24 @@ function CardForm(props) {
 
   function videoHandelChange(event) {
     let formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    VideoUploadInstance.post("", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress: (data) => {
-        //Set the progress value to show the progress bar
-        setUploadProgress(Math.round((100 * data.loaded) / data.total));
-      },
-    }).then((response) => {
-      setVideoInfo(response.data);
-    });
+    if (event.target.files.length > 0) {
+      console.log(event.target.files);
+      if (event.target.files[0].name.split(".").pop() === "mp4") {
+        formData.append("file", event.target.files[0]);
+        VideoUploadInstance.post("", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (data) => {
+            //Set the progress value to show the progress bar
+            setUploadProgress(Math.round((100 * data.loaded) / data.total));
+          },
+        }).then((response) => {
+          console.log(response.data);
+          setVideoInfo(response.data);
+        });
+      } else alert("僅支援 .mp4 影片格式");
+    } else alert("檔案為空");
   }
 
   function submitHandler(event) {
@@ -318,6 +328,10 @@ function CardForm(props) {
     setGreetText(items[Math.floor(Math.random() * items.length)]);
   };
 
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
   return (
     <div className="cf-div" id="card">
       <h2>
@@ -355,12 +369,30 @@ function CardForm(props) {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>{wording[props.lang]["upload-greet-vid"]}</Form.Label>
           <br />
+          <Button size="sm" variant="danger" onClick={handleClick}>
+            <AiFillCamera />
+            立即拍攝
+          </Button>
           <input
             type="file"
             accept=".mp4"
-            capture="user"
+            capture
+            ref={hiddenFileInput}
             onChange={videoHandelChange}
-          ></input>
+            style={{ display: "none" }}
+          />{" "}
+          或{" "}
+          <Button size="sm" variant="primary" onClick={handleClick}>
+            <AiFillFolderOpen />
+            選擇檔案
+          </Button>
+          <input
+            type="file"
+            accept=".mp4"
+            ref={hiddenFileInput}
+            onChange={videoHandelChange}
+            style={{ display: "none" }}
+          />
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
@@ -442,13 +474,12 @@ export default function SenderPage(props) {
   const [headerMenu, setHeaderMenu] = useState(null);
   const [viewNumber, setViewNumber] = useState(0);
   const [returnCardExist, setReturnCardExist] = useState(false);
-  const viewNumberThresh = 99999999;
+  const viewNumberThresh = 999;
 
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   useEffect(() => {
     // Check if orderNumber is valid
@@ -464,8 +495,9 @@ export default function SenderPage(props) {
 
         // Use Password to Get previous uploaded Video and Text
         GetPassword(orderNumber)
-          .then((pw) => {
-            if (pw) {
+          .then((password) => {
+            if (password) {
+              var pw = password.toString();
               GetViewNumber(orderNumber)
                 .then((vNumber) => {
                   setViewNumber(vNumber);
@@ -510,7 +542,7 @@ export default function SenderPage(props) {
           .catch((err) => console.error(err));
       }
     });
-  }, []);
+  }, [orderNumber, props.lang]);
 
   useEffect(() => {
     if (viewNumber < viewNumberThresh) {
@@ -565,14 +597,22 @@ export default function SenderPage(props) {
           <Modal.Body>
             <p>確認是否已得知以下規定：</p>
             <ol>
-              <li>本公司為提供您配送服務，需收集、處理、利用您的顧客資料，並因執行配送需求將您的資料提供給相關協力廠商。</li>
-              <li>若您提供的資料不完整或錯誤，將導致本公司無法如期如質到貨，導致您的權益受損。</li>
-              <li>本公司得以利用您提供的資料以郵寄、電話或簡訊方式，提供本公司之行銷宣傳。</li>
+              <li>
+                本公司為提供您配送服務，需收集、處理、利用您的顧客資料，並因執行配送需求將您的資料提供給相關協力廠商。
+              </li>
+              <li>
+                若您提供的資料不完整或錯誤，將導致本公司無法如期如質到貨，導致您的權益受損。
+              </li>
+              <li>
+                本公司得以利用您提供的資料以郵寄、電話或簡訊方式，提供本公司之行銷宣傳。
+              </li>
               <li>依個人資料保護法第三條.您可聯繫本公司行使相關權利。</li>
             </ol>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleClose}>了解</Button>
+            <Button variant="primary" onClick={handleClose}>
+              了解
+            </Button>
           </Modal.Footer>
         </Modal>
         <OrderInfo

@@ -245,6 +245,7 @@ const detailDict = {
         require("../img/mango-certificate-2.jpg").default,
         require("../img/mango-certificate-3.jpg").default,
       ],
+      "vid-poster": null,
     },
     jp: {
       productName: "ロブスターマンゴー",
@@ -269,6 +270,7 @@ const detailDict = {
         require("../img/mango-certificate-2.jpg").default,
         require("../img/mango-certificate-3.jpg").default,
       ],
+      "vid-poster": null,
     },
   },
   銷日鳳梨: {
@@ -286,6 +288,7 @@ const detailDict = {
         require("../img/certificate.jpg").default,
         require("../img/certificate.jpg").default,
       ],
+      "vid-poster": null,
     },
     jp: {
       productName: "金鑽鳳梨",
@@ -301,6 +304,7 @@ const detailDict = {
         require("../img/certificate.jpg").default,
         require("../img/certificate.jpg").default,
       ],
+      "vid-poster": null,
     },
   },
   銷日荔枝: {
@@ -315,6 +319,7 @@ const detailDict = {
       farmText:
         "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
       certificates: [require("../img/certificate.jpg").default],
+      "vid-poster": null,
     },
     jp: {
       productName: "玉荷包荔枝",
@@ -327,6 +332,71 @@ const detailDict = {
       farmText:
         "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
       certificates: [require("../img/certificate.jpg").default],
+      "vid-poster": null,
+    },
+  },
+  銷日文旦: {
+    "zh-tw": {
+      productName: "楊媽媽 翠玉文旦",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/52d5fc9d-4f91-426c-997d-4003fc564302-720p.mp4",
+      productPhoto: require("../img/pomelo/pomelo.jpg").default,
+      productText:
+        "臺灣東部花蓮縣—瑞穗鄉，北緯23.5°，在海岸山脈中央山脈之間的花東縱谷。廣植文旦達800公頃，位居全國之冠，文旦品質良好，酸甜比例風味佳。楊媽媽耕耘著山腳下這片充滿石墨玉的土地，孕育出翠綠如玉的「翠玉文旦」。 文旦園位於中央山脈支脈虎頭山腳下，50年前，每遇上大雨颱風，伴隨土石沖刷而下，將田地瞬間變成河床，也順道沖下珍貴的—石墨玉。 從滿地的石頭開始，楊媽媽一點一滴耕耘著，這片充滿石墨玉的土地，逐步變成結實纍纍的柚園，孕育出翠綠如玉的文旦柚。 翠玉文旦果肉晶瑩剔透，酸中帶甜，酸甜比例風味絕佳，富含蛋白質、纖維及多種維生素。 每年秋天，白露節氣前十日採收，大約是在8/25-30期間採收，翠綠如玉的果實，成為中秋佳節中的最佳風味。 文旦離株採收後會開始辭水，也就是外表油包的風味會透過辭水進入柚肉，提高文旦柚肉甜味。最佳賞味期就是辭水的10-14天期間。",
+      farmName: "台鼎龍蝦芒果農場",
+      farmPhoto: require("../img/mango-farm.jpg").default,
+      farmText:
+        "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
+      certificates: [
+        require("../img/pomelo/certificates/resume/1.jpeg").default,
+        require("../img/pomelo/certificates/resume/2.jpg").default,
+        require("../img/pomelo/certificates/resume/3.jpg").default,
+        require("../img/pomelo/certificates/certificate/1.jpg").default,
+        require("../img/pomelo/certificates/certificate/2.jpg").default,
+        require("../img/pomelo/certificates/certificate/3.jpg").default,
+        require("../img/pomelo/certificates/certificate/4.jpg").default,
+        require("../img/pomelo/certificates/certificate/5.jpg").default,
+      ],
+      "vid-poster": require("../img/pomelo/vid-poster.png").default,
+    },
+    jp: {
+      productName: "鶴岡ひすい文旦",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/52d5fc9d-4f91-426c-997d-4003fc564302-720p.mp4",
+      productPhoto: require("../img/pomelo/pomelo.jpg").default,
+      productText:
+        "台湾の一番高い山脈の中央山脈の間に、 “花東縱谷”というところがあり、\
+        台湾東部花蓮県-瑞穂郷、北緯 23.5 度、熱帯地方が通過します。\
+        恵まれた地理的環境と豊富で優れた水質があるにより、有名な「鶴岡文旦」が生まれました。\
+        台湾柚子の栄養価と健康食療法\
+        台湾柚子は又の名を文旦といい、種類が豊富です。\
+        果肉が厚くジューシーで、甘酸っぱくて香りの良い独特の味はくせになる美味しさです。\
+        台湾柚子の栄養価は極めて高く、果肉にはたんぱく質、ビタミン B1・B2・C・P、\
+        カロテン、カルシウム、リン、鉄・炭水化物、酒石酸(しゅせきさん)、クエン酸等が多く含まれています。\
+        にビタミン C の含有量は果物の中でも多く、レモンの 3 倍、リンゴの 7 倍となっています\
+        文旦の皮が黄色くなっているということはすでに適度の水分が抜けているというサインで、果肉の肉質が柔らかく\
+        なっており甘みも増しています。\
+        文旦は熟度が進んだ状態で収穫しますと果肉が変質しやすく流通に適しませんので、まだ若い皮が緑色の状態で\
+        収穫されます。\
+        もし時間をおいてから召し上がられたい場合には、皮が緑色の文日を選び、風通しの良い所に置いておき、皮が\
+        黄色くなったら召し上がって下さい。",
+      farmName: "台鼎龍蝦芒果農場",
+      farmPhoto: require("../img/mango-farm.jpg").default,
+      farmText:
+        "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
+      certificates: [
+        require("../img/pomelo/certificates/resume/1.jpeg").default,
+        require("../img/pomelo/certificates/resume/2.jpg").default,
+        require("../img/pomelo/certificates/resume/3.jpg").default,
+        require("../img/pomelo/certificates/certificate/1.jpg").default,
+        require("../img/pomelo/certificates/certificate/2.jpg").default,
+        require("../img/pomelo/certificates/certificate/3.jpg").default,
+        require("../img/pomelo/certificates/certificate/4.jpg").default,
+        require("../img/pomelo/certificates/certificate/5.jpg").default,
+      ],
+      "vid-poster": require("../img/pomelo/vid-poster.png").default,
     },
   },
 };
