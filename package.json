@@ -13,6 +13,7 @@
     "filepond-plugin-file-validate-type": "^1.2.6",
     "filepond-plugin-image-preview": "^4.6.6",
     "filepond-plugin-media-preview": "^1.0.7",
+    "handbrake-js": "^5.0.2",
     "jquery": "^3.6.0",
     "popper": "^1.0.1",
     "propper": "^1.0.4",

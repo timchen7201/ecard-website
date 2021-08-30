@@ -56,21 +56,29 @@ function CardForm(props) {
   function videoHandelChange(event) {
     let formData = new FormData();
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
-      if (event.target.files[0].name.split(".").pop() === "mp4") {
-        formData.append("file", event.target.files[0]);
-        VideoUploadInstance.post("", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (data) => {
-            //Set the progress value to show the progress bar
-            setUploadProgress(Math.round((100 * data.loaded) / data.total));
-          },
-        }).then((response) => {
-          setVideoInfo(response.data);
-        });
-      } else alert("僅支援 .mp4 影片格式");
+      if (
+        event.target.files[0].name.split(".").pop().toLowerCase() === "mp4" ||
+        event.target.files[0].name.split(".").pop().toLowerCase() === "mov"
+      ) {
+        if (event.target.files[0].size < 20971520) {
+          if (
+            event.target.files[0].name.split(".").pop().toLowerCase() === "mov"
+          ) {
+          }
+          /*formData.append("file", event.target.files[0]);
+          VideoUploadInstance.post("", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (data) => {
+              //Set the progress value to show the progress bar
+              setUploadProgress(Math.round((100 * data.loaded) / data.total));
+            },
+          }).then((response) => {
+            setVideoInfo(response.data);
+          });*/
+        } else alert("影片檔案需小於 20 MB");
+      } else alert("僅支援 .mp4 或 .mov 影片格式");
     } else alert("檔案為空");
   }
 
@@ -97,7 +105,7 @@ function CardForm(props) {
   }
 
   const exambleOnclick = () => {
-    var items = gratitudeExamples;
+    var items = gratitudeExamples[props.lang];
     setGreetText(items[Math.floor(Math.random() * items.length)]);
   };
 
@@ -137,32 +145,37 @@ function CardForm(props) {
             placeholder={wording[props.lang]["sender-name-example"]}
             defaultValue={sender}
             onChange={senderHandelChange}
+            maxLength="31"
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>{wording[props.lang]["upload-thank-vid"]}</Form.Label>
+          <Form.Label>
+            {wording[props.lang]["upload-thank-vid"] +
+              " " +
+              wording[props.lang]["vertical-vid-hint"]}
+          </Form.Label>
           <br />
           <Button size="sm" variant="danger" onClick={handleClick}>
             <AiFillCamera />
-            立即拍攝
+            {wording[props.lang]["shooting-now"]}
           </Button>
           <input
             type="file"
-            accept=".mp4"
+            accept=".mp4, .MOV"
             capture
             ref={hiddenFileInput}
             onChange={videoHandelChange}
             style={{ display: "none" }}
           />{" "}
-          或{" "}
+          or{" "}
           <Button size="sm" variant="primary" onClick={handleClick}>
             <AiFillFolderOpen />
-            選擇檔案
+            {wording[props.lang]["choose-file"]}
           </Button>
           <input
             type="file"
-            accept=".mp4"
+            accept=".mp4, .MOV"
             ref={hiddenFileInput}
             onChange={videoHandelChange}
             style={{ display: "none" }}
@@ -191,6 +204,7 @@ function CardForm(props) {
             placeholder={wording[props.lang]["greet-content-example"]}
             onChange={greetTextHandelChange}
             value={greetText}
+            maxLength="143"
           />
         </Form.Group>
         <div className="cf-buttons-div">
@@ -279,7 +293,7 @@ export default function ReceiverPage(props) {
       {
         name: wording[props.lang]["make-tcard"],
         id: "thanks-card",
-        show: false,
+        show: password ? true : false,
       },
       { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
     ]);

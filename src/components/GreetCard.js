@@ -64,7 +64,8 @@ function EnterCode(props) {
               >
                 <img
                   className="qm-img"
-                  src={require("../img/questmark-icon.png").default} alt=""
+                  src={require("../img/questmark-icon.png").default}
+                  alt=""
                 ></img>
               </OverlayTrigger>
               <table>
@@ -96,10 +97,10 @@ function EnterCode(props) {
 
 export default function GreetCard(props) {
   const videoUrl =
-    props.preview && props.videoInfo && props.videoInfo.fileId
-      ? VideoPreviewUrl(props.videoInfo.fileId)
-      : props.videoInfo && props.videoInfo.standardDefinition
+    props.videoInfo && props.videoInfo.fileId
       ? props.videoInfo.standardDefinition
+        ? props.videoInfo.standardDefinition
+        : VideoPreviewUrl(props.videoInfo.fileId)
       : null;
 
   return (

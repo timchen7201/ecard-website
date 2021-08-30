@@ -16,7 +16,7 @@ export default function CardTemplate1(props) {
                       src={props.videoUrl + "#t=0.1"}
                       controls
                       preload="auto"
-                    ></video>
+                    >影片正在上傳中，請稍後。</video>
                   ) : (
                     <p>
                       {!props.returnCard && (
@@ -38,13 +38,13 @@ export default function CardTemplate1(props) {
                   <h3 className="ct1-text-1">
                     {wording[props.lang]["gcard-from-part-1"]}
                   </h3>
-                  <h3 className="ct1-text-2">
-                    <b>
+                  <b>
+                    <p className="ct1-text-2">
                       {props.sender
                         ? props.sender
                         : wording[props.lang]["sender"]}
-                    </b>
-                  </h3>
+                    </p>{" "}
+                  </b>
                   {!props.returnCard && (
                     <h3 className="ct1-text-3">
                       {wording[props.lang]["gcard-from-part-2"]}
@@ -55,7 +55,6 @@ export default function CardTemplate1(props) {
                       {wording[props.lang]["tcard-from-part-2"]}
                     </h3>
                   )}
-                  <br />
                   <b>
                     <p className="ct1-gtext">
                       {props.greetText

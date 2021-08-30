@@ -8,7 +8,10 @@ import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { wording } from "../wording";
 import { AiFillCamera, AiFillFolderOpen } from "react-icons/ai";
-import { Modal } from "react-bootstrap/";
+import Carousel from "react-multi-carousel";
+
+// import { Modal } from "react-bootstrap/";
+// import ReactPlayer from "react-player";
 import {
   IsOrderNumberValid,
   GetPassword,
@@ -51,10 +54,41 @@ function OrderInfo(props) {
       : ["銷日芒果", "銷日鳳梨", "銷日荔枝"];
 
   function certificate(cts) {
+    const responsive = {
+      superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5,
+      },
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 3,
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 2,
+      },
+    };
     if (!cts || cts.length < 1) return null;
     return (
       <Tab eventKey="certificates" title={wording[props.lang]["certificate"]}>
-        <table>
+        <div className="oi-cr-div">
+          <Carousel responsive={responsive}>
+            {cts.map((item, index) => {
+              return (
+                <div className="oi-cr-item">
+                  <img src={item} alt=""></img>
+                </div>
+              );
+            })}
+          </Carousel>
+        </div>
+
+        {/*<table>
           <tbody>
             <tr>
               {cts.map((item, index) => {
@@ -66,7 +100,7 @@ function OrderInfo(props) {
               })}
             </tr>
           </tbody>
-        </table>
+        </table>*/}
       </Tab>
     );
   }
@@ -116,6 +150,13 @@ function OrderInfo(props) {
                           <table>
                             <tbody>
                               <tr>
+                                <td className="oi-table-text">
+                                  <h4>
+                                    <b>
+                                      {detailDict[item][props.lang].productName}
+                                    </b>
+                                  </h4>
+                                </td>
                                 <td className="oi-table-img">
                                   <img
                                     className="oi-img"
@@ -125,25 +166,34 @@ function OrderInfo(props) {
                                     alt=""
                                   ></img>
                                 </td>
-                                <td className="oi-table-text">
-                                  <h4>
-                                    <b>
-                                      {detailDict[item][props.lang].productName}
-                                    </b>
-                                  </h4>
-                                  <p>
-                                    {detailDict[item][props.lang].productText}
-                                  </p>
-                                </td>
                               </tr>
                             </tbody>
                           </table>
+                          <p>{detailDict[item][props.lang].productText}</p>
                         </Tab>
                         <Tab
                           eventKey="farm"
                           title={wording[props.lang]["farm-info"]}
                         >
-                          <table>
+                          <video
+                            className="oi-card-video"
+                            src={
+                              detailDict[item][props.lang]["vid-link"] +
+                              "#t=0.1"
+                            }
+                            controls
+                            preload="auto"
+                          ></video>
+                          {/*<div className="player-wrapper">
+                            <ReactPlayer
+                              className="oi-react-player"
+                              url={detailDict[item][props.lang]["vid-link"]}
+                              width="100%"
+                              height="100%"
+                              controls={true}
+                            />
+                          </div>*/}
+                          {/*<table>
                             <tbody>
                               <tr>
                                 <td className="oi-table-text">
@@ -163,7 +213,7 @@ function OrderInfo(props) {
                                 </td>
                               </tr>
                             </tbody>
-                          </table>
+                          </table>*/}
                         </Tab>
                         {certificate(detailDict[item][props.lang].certificates)}
                       </Tabs>
@@ -243,21 +293,24 @@ function CardForm(props) {
   function videoHandelChange(event) {
     let formData = new FormData();
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
-      if (event.target.files[0].name.split(".").pop() === "mp4") {
-        formData.append("file", event.target.files[0]);
-        VideoUploadInstance.post("", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (data) => {
-            //Set the progress value to show the progress bar
-            setUploadProgress(Math.round((100 * data.loaded) / data.total));
-          },
-        }).then((response) => {
-          console.log(response.data);
-          setVideoInfo(response.data);
-        });
+      alert(event.target.files[0].name);
+      alert(event.target.files[0].name.split(".").pop());
+      if (event.target.files[0].name.split(".").pop().toLowerCase() === "mp4") {
+        if (event.target.files[0].size < 20971520) {
+          formData.append("file", event.target.files[0]);
+          VideoUploadInstance.post("", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (data) => {
+              //Set the progress value to show the progress bar
+              setUploadProgress(Math.round((100 * data.loaded) / data.total));
+            },
+          }).then((response) => {
+            console.log(response.data);
+            setVideoInfo(response.data);
+          });
+        } else alert("影片檔案需小於 20 MB");
       } else alert("僅支援 .mp4 影片格式");
     } else alert("檔案為空");
   }
@@ -299,12 +352,14 @@ function CardForm(props) {
       });
   }
 
-  const examples = () => {
-    if (!exampleGreets || Object.keys(exampleGreets).length < 1) return null;
-    const types = Object.keys(exampleGreets);
+  const examples = (lang) => {
+    if (!exampleGreets[lang] || Object.keys(exampleGreets[lang]).length < 1)
+      return null;
+    const types = Object.keys(exampleGreets[lang]);
+
     return (
       <div className="cf-greet-example">
-        <span>{wording[props.lang]["use-example"]}</span>
+        <span>{wording[lang]["use-example"]}</span>
         {types.map((item, index) => {
           return (
             <span>
@@ -324,7 +379,7 @@ function CardForm(props) {
   };
 
   const exambleOnclick = (type) => {
-    var items = exampleGreets[type];
+    var items = exampleGreets[props.lang][type];
     setGreetText(items[Math.floor(Math.random() * items.length)]);
   };
 
@@ -347,7 +402,9 @@ function CardForm(props) {
         sender={sender}
         videoUrl={
           videoInfo && videoInfo.fileId
-            ? VideoPreviewUrl(videoInfo.fileId)
+            ? videoInfo.standardDefinition
+              ? videoInfo.standardDefinition
+              : VideoPreviewUrl(videoInfo.fileId)
             : null
         }
         greetText={greetText}
@@ -363,15 +420,20 @@ function CardForm(props) {
             placeholder={wording[props.lang]["sender-name-example"]}
             defaultValue={sender}
             onChange={senderHandelChange}
+            maxLength="31"
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>{wording[props.lang]["upload-greet-vid"]}</Form.Label>
+          <Form.Label>
+            {wording[props.lang]["upload-greet-vid"] +
+              " " +
+              wording[props.lang]["vertical-vid-hint"]}
+          </Form.Label>
           <br />
           <Button size="sm" variant="danger" onClick={handleClick}>
             <AiFillCamera />
-            立即拍攝
+            {wording[props.lang]["shooting-now"]}
           </Button>
           <input
             type="file"
@@ -381,10 +443,10 @@ function CardForm(props) {
             onChange={videoHandelChange}
             style={{ display: "none" }}
           />{" "}
-          或{" "}
+          or{" "}
           <Button size="sm" variant="primary" onClick={handleClick}>
             <AiFillFolderOpen />
-            選擇檔案
+            {wording[props.lang]["choose-file"]}
           </Button>
           <input
             type="file"
@@ -410,8 +472,9 @@ function CardForm(props) {
             defaultValue={greetText}
             onChange={greetTextHandelChange}
             value={greetText}
+            maxLength="143"
           />
-          {examples()}
+          {examples(props.lang)}
         </Form.Group>
         <br />
         <br />
@@ -585,7 +648,7 @@ export default function SenderPage(props) {
     return (
       <div>
         <Header menu={headerMenu}></Header>
-        <Modal
+        {/*<Modal
           show={show}
           onHide={handleClose}
           backdrop="static"
@@ -614,7 +677,7 @@ export default function SenderPage(props) {
               了解
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal>*/}
         <OrderInfo
           show={isONValid}
           orderInfo={orderInfo}

@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import GreetCard from "../components/GreetCard";
 import GiftInfo from "../components/GiftInfo";
 import BrandIntro from "../components/BrandIntro";
+import { wording } from "../wording";
 
 import {
   IsOrderNumberValid,
@@ -20,6 +21,7 @@ export default function PreviewPage(props) {
   const [greetText, setGreetText] = useState(null);
   const [sender, setSender] = useState(null);
   const [videoInfo, setVideoInfo] = useState(null);
+  const [headerMenu, setHeaderMenu] = useState(null);
 
   useEffect(() => {
     // Check if orderNumber is valid
@@ -54,11 +56,21 @@ export default function PreviewPage(props) {
     });
   }, [orderNumber]);
 
-  const headerMenu = [
-    { name: "觀看賀卡", id: "greet-card", show: true },
-    { name: "禮品介紹 & 區塊鏈溯源", id: "gift-info", show: true },
-    { name: "品牌介紹", id: "brand", show: true },
-  ];
+  useEffect(() => {
+    setHeaderMenu([
+      {
+        name: wording[props.lang]["watch-gcard"],
+        id: "greet-card",
+        show: true,
+      },
+      {
+        name: wording[props.lang]["gift-intro-and-blockchain"],
+        id: "gift-info",
+        show: true,
+      },      
+      { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
+    ]);
+  }, [props.lang]);
 
   return (
     <div>

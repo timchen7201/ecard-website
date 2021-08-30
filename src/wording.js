@@ -87,6 +87,9 @@ export const wording = {
     "new-house": "新居",
     birthday: "生日",
     "new-year": "新年",
+    "shooting-now":"立即拍攝",
+    "choose-file":"選擇檔案",
+    "vertical-vid-hint":"(為畫面效果，儘量選用「直式」影片)"
   },
   jp: {
     "title-line-1": "ブロックチェーン",
@@ -183,6 +186,9 @@ export const wording = {
     "new-house": "新居お祝い",
     birthday: "お誕生日お祝い",
     "new-year": "新年お祝い",
+    "shooting-now":"今から撮影する。",
+    "choose-file":"データを選択する。",
+    "vertical-vid-hint":"(画面効果については、「ストレート」ビデオを選択してみてください)"
   },
 };
 

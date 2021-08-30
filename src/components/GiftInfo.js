@@ -240,16 +240,30 @@ export default function GiftInfo(props) {
       <br />
       <br />
       <br />
-      {products.map((item, index) => {
-        return (
-          <GiftDetail
-            show={index === selectedPIndex}
-            product={item}
-            isWideScreen={isWideScreen}
-            lang={props.lang}
-          ></GiftDetail>
-        );
-      })}
+      {/*item === "pomelo" && (
+        <div id="pomelo-div">
+          <iframe
+            src="https://fresh-io.web.app/partner-invisible/yangpomelo"
+            id="pomelo-iframe"
+            scrolling="no"
+            frameBorder="0"
+          ></iframe>
+        </div>
+      )*/}
+
+      {
+        /*item !== "pomelo" &&*/
+        products.map((item, index) => {
+          return (
+            <GiftDetail
+              show={index === selectedPIndex}
+              product={item}
+              isWideScreen={isWideScreen}
+              lang={props.lang}
+            ></GiftDetail>
+          );
+        })
+      }
     </div>
   );
 }

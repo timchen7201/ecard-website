@@ -63,6 +63,7 @@
 
     .ct1-text-2 {
         white-space: pre-wrap;
+        font-size: 30px;
         color: rgb(236, 89, 3)
     }
 
@@ -105,4 +106,20 @@
         font-size: 3vw;
         color: rgb(158, 37, 0);
     }
+}
+
+.ct-player-wrapper {
+    position: relative;
+    padding-top: 177.78%
+        /* Player ratio: 100 / (1280 / 720) */
+}
+
+.ct-react-player {
+    position: absolute;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    padding-left: 5%;
+    padding-right: 5%;
+    top: 0;
+    left: 0;
 }

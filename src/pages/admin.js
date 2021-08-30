@@ -30,10 +30,11 @@ function ShowQR(props) {
               <p>
                 <b>銷日鳳梨</b>
               </p>
-              <img src={require("../img/qr-pineapple.png").default} alt=""></img>
+              <img
+                src={require("../img/qr-pineapple.png").default}
+                alt=""
+              ></img>
             </td>
-          </tr>
-          <tr>
             <td>
               <p>
                 <b>銷日荔枝</b>
@@ -57,12 +58,12 @@ export default function Admin(props) {
   const [uploaded, setUploaded] = useState(false);
   const { authState, authDispatch } = useContext(AuthContext);
   const [records, setRecords] = useState([]);
-  
+
   useEffect(() => {
     fetchRecord().then((data) => {
       setRecords(data);
     });
-  }, []);
+  }, [uploaded]);
 
   function UploadPanel() {
     const [xlsxFile, setXlsxFile] = useState([]);
@@ -82,7 +83,7 @@ export default function Admin(props) {
 
     const handleSubmit = (e) => {
       const xlsxData = new FormData();
-      
+
       if (xlsxFile !== null && typeof xlsxFile !== null) {
         console.log("xlsxFile");
         console.log(xlsxFile);
@@ -100,6 +101,7 @@ export default function Admin(props) {
         });
       }
     };
+
     return (
       <div className="ul-div">
         <h3>
@@ -118,7 +120,9 @@ export default function Admin(props) {
             accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           />
           <div className="mt-3">
-            {(fileLoaded && !uploading) && <Button onClick={handleSubmit} >上傳</Button>}
+            {fileLoaded && !uploading && (
+              <Button onClick={handleSubmit}>上傳</Button>
+            )}
             {uploading && (
               <Button variant="primary" disabled>
                 <Spinner
@@ -190,8 +194,8 @@ export default function Admin(props) {
   return (
     <div>
       <Header menu={null} logOutEvent={logOutEvent}></Header>
-      {!uploaded && <UploadPanel></UploadPanel>}
       {uploaded && <ShowQR></ShowQR>}
+      <UploadPanel></UploadPanel>
       <BrandIntro lang={props.lang}></BrandIntro>
     </div>
   );
