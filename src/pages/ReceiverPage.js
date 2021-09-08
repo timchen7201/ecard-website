@@ -22,15 +22,19 @@ import {
   GetReturnVideoInfo,
   GetReturnText,
   itemProductsMap,
+  /*otherPlatform,*/
 } from "../api/gift";
 
-import { Button, Form, ProgressBar } from "react-bootstrap";
+import { Button, Form, ProgressBar, Spinner } from "react-bootstrap";
 
 function CardForm(props) {
   const [sender, setSender] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
   const [greetText, setGreetText] = useState("");
   const [uploadProgress, setUploadProgress] = useState(null);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [videoConverting, setVideoConverting] = useState(false);
+  const [cardSaving, setCardSaving] = useState(false);
   const hiddenFileInput = React.useRef(null);
 
   useEffect(() => {
@@ -40,6 +44,22 @@ function CardForm(props) {
       if (props.greetText) setGreetText(props.greetText);
     }
   }, [props.sender, props.videoInfo, props.greetText, props.show]);
+
+  useEffect(() => {
+    var vid_u = null;
+    if (videoInfo && videoInfo.fileId && !videoInfo.exception) {
+      if (videoInfo.standardDefinition) vid_u = videoInfo.standardDefinition;
+      else if (videoInfo.highDefinition) vid_u = videoInfo.highDefinition;
+      else vid_u = VideoPreviewUrl(videoInfo.fileId);
+      /*else if (
+        props.platform.toLowerCase() === "windows" ||
+        props.platform.toLowerCase() === "android"
+      )
+        vid_u = VideoPreviewUrl(videoInfo.fileId);
+      else vid_u = otherPlatform;*/
+    }
+    setVideoUrl(vid_u);
+  }, [videoInfo /*, props.platform*/]);
 
   if (!props.show) {
     return null;
@@ -53,37 +73,117 @@ function CardForm(props) {
     setGreetText(event.target.value);
   }
 
-  function videoHandelChange(event) {
+  function videoHandleChange(event) {
+    if (event.target.files.length <= 0) {
+      alert(wording[props.lang]["no-file"]);
+      return;
+    }
+
+    var nameLength = event.target.files[0].name.length;
+    if (nameLength > 300) {
+      alert(
+        wording[props.lang]["name-length-exceeded-part-1"] +
+          nameLength.toString() +
+          wording[props.lang]["name-length-exceeded-part-2"]
+      );
+      return;
+    }
+
+    var extension = event.target.files[0].name.split(".").pop().toLowerCase();
+    if (extension !== "mp4" && extension !== "mov") {
+      alert(
+        wording[props.lang]["extension-violation-part-1"] +
+          extension +
+          wording[props.lang]["extension-violation-part-2"]
+      );
+      return;
+    }
+
+    var size = event.target.files[0].size;
+    if (size > 20971520) {
+      alert(
+        wording[props.lang]["file-size-exceeded-part-1"] +
+          (Math.round((100 * size) / 1024 / 1024) / 100).toString() +
+          wording[props.lang]["file-size-exceeded-part-2"]
+      );
+      return;
+    }
+
     let formData = new FormData();
-    if (event.target.files.length > 0) {
-      if (
-        event.target.files[0].name.split(".").pop().toLowerCase() === "mp4" ||
-        event.target.files[0].name.split(".").pop().toLowerCase() === "mov"
-      ) {
-        if (event.target.files[0].size < 20971520) {
-          if (
-            event.target.files[0].name.split(".").pop().toLowerCase() === "mov"
-          ) {
-          }
-          /*formData.append("file", event.target.files[0]);
-          VideoUploadInstance.post("", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            onUploadProgress: (data) => {
-              //Set the progress value to show the progress bar
-              setUploadProgress(Math.round((100 * data.loaded) / data.total));
-            },
-          }).then((response) => {
-            setVideoInfo(response.data);
-          });*/
-        } else alert("影片檔案需小於 20 MB");
-      } else alert("僅支援 .mp4 或 .mov 影片格式");
-    } else alert("檔案為空");
+
+    formData.append("file", event.target.files[0]);
+    VideoUploadInstance.post("", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (data) => {
+        //Set the progress value to show the progress bar
+        setUploadProgress(Math.round((100 * data.loaded) / data.total));
+        if (Math.round((100 * data.loaded) / data.total) >= 99)
+          setVideoConverting(true);
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setVideoConverting(false);
+        if (!response.data.exception) {
+          setVideoInfo(response.data);
+          /*if (props.platform !== otherPlatform) setVideoInfo(response.data);
+              else {
+                const validateUser = (user) => !!user;
+                const POLL_INTERVAL = 1000;
+                const pollForNewUser = poll({
+                  fn: mockApi,
+                  validate: validateUser,
+                  interval: POLL_INTERVAL,
+                })
+                  .then((user) => console.log(user))
+                  .catch((err) => console.error(err));
+              }*/
+        } else {
+          alert(wording[props.lang]["video-upload-failed"]);
+          setUploadProgress(null);
+        }
+      })
+      .catch((err) => {
+        alert(wording[props.lang]["video-upload-failed"]);
+        setUploadProgress(null);
+      });
   }
 
   function submitHandler(event) {
     event.preventDefault(); //prevent the form from submitting
+
+    if (!props.password) {
+      alert(wording[props.lang]["enter-gift-code-part-2"]);
+      return;
+    }
+
+    if (!sender) {
+      alert(
+        wording[props.lang]["required-column-part-1"] +
+          wording[props.lang]["feedback-name"] +
+          wording[props.lang]["required-column-part-2"]
+      );
+      return;
+    }
+
+    if (!videoInfo || !videoInfo.fileId) {
+      alert(wording[props.lang]["upload-video-first"]);
+      return;
+    }
+
+    if (!greetText) {
+      alert(
+        wording[props.lang]["required-column-part-1"] +
+          wording[props.lang]["thank-content"] +
+          wording[props.lang]["required-column-part-2"]
+      );
+      return;
+    }
+
+    setCardSaving(true);
+
     UploadReturn({
       password: props.password,
       videoID: videoInfo.fileId,
@@ -91,6 +191,7 @@ function CardForm(props) {
       giftFrom: sender,
     })
       .then((response) => {
+        setCardSaving(false);
         console.log(response);
         alert(
           wording[props.lang]["send-tcard-succeed-part-1"] +
@@ -99,6 +200,7 @@ function CardForm(props) {
         );
       })
       .catch((err) => {
+        setCardSaving(false);
         alert(wording[props.lang]["tcard-save-fail"]);
         console.error(err);
       });
@@ -127,11 +229,7 @@ function CardForm(props) {
       <h6>{wording[props.lang]["tcard-instant-preview"]}</h6>
       <CardTemplate1
         sender={sender}
-        videoUrl={
-          videoInfo && videoInfo.fileId
-            ? VideoPreviewUrl(videoInfo.fileId)
-            : null
-        }
+        videoUrl={videoUrl}
         greetText={greetText}
         returnCard={true}
         lang={props.lang}
@@ -158,33 +256,41 @@ function CardForm(props) {
           <br />
           <Button size="sm" variant="danger" onClick={handleClick}>
             <AiFillCamera />
-            {wording[props.lang]["shooting-now"]}
+            {wording[props.lang]["shooting-now"]} or <AiFillFolderOpen />
+            {wording[props.lang]["choose-file"]}
           </Button>
           <input
             type="file"
-            accept=".mp4, .MOV"
+            accept=".mp4, .mov"
             capture
             ref={hiddenFileInput}
-            onChange={videoHandelChange}
+            onChange={videoHandleChange}
             style={{ display: "none" }}
           />{" "}
-          or{" "}
+          {/*or{" "}
           <Button size="sm" variant="primary" onClick={handleClick}>
             <AiFillFolderOpen />
             {wording[props.lang]["choose-file"]}
           </Button>
           <input
             type="file"
-            accept=".mp4, .MOV"
+            accept=".mp4, .mov"
             ref={hiddenFileInput}
             onChange={videoHandelChange}
             style={{ display: "none" }}
-          />
+          /> */}
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
-          {uploadProgress === 100 && (
-            <p>{wording[props.lang]["upload-vid-complete"]}</p>
+          {videoConverting && (
+            <p>
+              <b>{wording[props.lang]["video-converting"]}</b>
+            </p>
+          )}
+          {uploadProgress === 100 && !videoConverting && (
+            <p>
+              <b>{wording[props.lang]["upload-vid-complete"]}</b>
+            </p>
           )}
         </Form.Group>
 
@@ -208,9 +314,23 @@ function CardForm(props) {
           />
         </Form.Group>
         <div className="cf-buttons-div">
-          <Button variant="success" type="submit">
-            {wording[props.lang]["save-and-send"]}
-          </Button>
+          {!cardSaving && (
+            <Button variant="success" type="submit">
+              {wording[props.lang]["save-and-send"]}
+            </Button>
+          )}
+          {cardSaving && (
+            <Button variant="success" disabled>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              Loading...
+            </Button>
+          )}
         </div>
       </Form>
     </div>
@@ -229,6 +349,7 @@ export default function ReceiverPage(props) {
   const [returnText, setReturnText] = useState(null);
   const [returnSender, setReturnSender] = useState(null);
   const [returnVideoInfo, setReturnVideoInfo] = useState(null);
+  const [platform, setPlatform] = useState("");
 
   const pwEnterEvent = (pw) => {
     if (!pw) {
@@ -238,6 +359,23 @@ export default function ReceiverPage(props) {
         if (!valid) {
           alert(wording[props.lang]["enter-code-error"]);
         } else {
+          // Get Platform Info
+          navigator.userAgentData
+            .getHighEntropyValues([
+              "architecture",
+              "model",
+              "platform",
+              "platformVersion",
+              "uaFullVersion",
+            ])
+            .then((ua) => {
+              console.log(ua);
+              if (ua.platform) {
+                console.log(ua.platform);
+                setPlatform(ua.platform);
+              }
+            });
+
           // Get Greet Card Info.
           GetVideoInfo(pw)
             .then((vInfo) => {
@@ -310,6 +448,7 @@ export default function ReceiverPage(props) {
         greetText={greetText}
         preview={false}
         lang={props.lang}
+        platform={platform}
       ></GreetCard>
       <GiftInfo
         item={item}
@@ -331,6 +470,7 @@ export default function ReceiverPage(props) {
         videoInfo={returnVideoInfo}
         greetText={returnText}
         lang={props.lang}
+        platform={platform}
       ></CardForm>
       <BrandIntro lang={props.lang}></BrandIntro>
     </div>

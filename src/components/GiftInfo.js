@@ -240,7 +240,7 @@ export default function GiftInfo(props) {
       <br />
       <br />
       <br />
-      {/*item === "pomelo" && (
+      {/*props.domestic && item === "pomelo" && (
         <div id="pomelo-div">
           <iframe
             src="https://fresh-io.web.app/partner-invisible/yangpomelo"
@@ -252,7 +252,7 @@ export default function GiftInfo(props) {
       )*/}
 
       {
-        /*item !== "pomelo" &&*/
+        /*(!props.domestic || item !== "pomelo") &&*/
         products.map((item, index) => {
           return (
             <GiftDetail

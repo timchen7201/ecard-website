@@ -16,6 +16,7 @@ import { AuthContext } from "./appContext";
 import { fetchAdmin } from "./api/admin";
 import { useCookies } from "react-cookie";
 import { LangContext } from "./wording";
+import TestVideo from "./pages/TestVideo";
 
 function App() {
   const [cookies, setCookie] = useCookies(["lang"]);
@@ -144,13 +145,16 @@ function App() {
                 <SenderPage lang={lang} />
               </Route>
               <Route exact path="/receiver/:item">
-                <ReceiverPage lang={lang} domestic={false}/>
+                <ReceiverPage lang={lang} domestic={false} />
               </Route>
               <Route exact path="/preview/:orderNumber">
                 <PreviewPage lang={lang} />
               </Route>
               <Route exact path="/domestic/receiver/:item">
                 <ReceiverPage lang={lang} domestic={true} />
+              </Route>
+              <Route exact path="/TestVideo/:testCase">
+                <TestVideo />
               </Route>
             </Route>
           </Switch>

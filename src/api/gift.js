@@ -22,7 +22,7 @@ const FetchVideo = async (id) => {
 const FetchPreViewVideo = async (id) => {
   try {
     const response = await axios.get(
-      `${Constant.MEDIA_URL}/api/Cards/streaming/${id}`
+      `${Constant.MEDIA_URL}/api/Cards/video/${id}.mp4`
     );
     return response;
   } catch (err) {
@@ -171,13 +171,25 @@ const VideoUploadInstance = axios.create({
 });
 
 const VideoPreviewUrl = (fileId) => {
-  return Constant.MEDIA_URL + "/api/Cards/streaming/" + fileId;
+  return Constant.MEDIA_URL + "/api/Cards/video/" + fileId + ".mp4";
 };
 
 const GetVideoInfo = async (password) => {
   try {
     const { data } = await axios.post(
       `${Constant.SERVER_URL}/chiawei/getVideo`,
+      { password: password }
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const GetPreviewVideoInfo = async (password) => {
+  try {
+    const { data } = await axios.post(
+      `${Constant.SERVER_URL}/chiawei/getPreviewVideo`,
       { password: password }
     );
     return data;
@@ -502,6 +514,29 @@ const gratitudeExamples = {
   ],
 };
 
+const otherPlatform = "other-platform";
+
+const Poll = ({ fn, validate, interval, maxAttempts }) => {
+  console.log("Start poll...");
+  let attempts = 0;
+
+  const executePoll = async (resolve, reject) => {
+    console.log("- poll");
+    const result = await fn();
+    attempts++;
+
+    if (validate(result)) {
+      return resolve(result);
+    } else if (maxAttempts && attempts === maxAttempts) {
+      return reject(new Error("Exceeded max attempts"));
+    } else {
+      setTimeout(executePoll, interval, resolve, reject);
+    }
+  };
+
+  return new Promise(executePoll);
+};
+
 export {
   UploadGift,
   FetchVideo,
@@ -516,6 +551,7 @@ export {
   VideoUploadInstance,
   VideoPreviewUrl,
   GetVideoInfo,
+  GetPreviewVideoInfo,
   IsPasswordValid,
   itemProductsMap,
   detailDict,
@@ -526,4 +562,6 @@ export {
   GetReturnText,
   GetViewNumber,
   GetReturnCardExist,
+  otherPlatform,
+  Poll,
 };

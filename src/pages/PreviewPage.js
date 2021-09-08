@@ -12,7 +12,7 @@ import {
   GetPassword,
   GetOrderInfo,
   GetText,
-  GetVideoInfo,
+  GetPreviewVideoInfo,
 } from "../api/gift";
 
 export default function PreviewPage(props) {
@@ -22,6 +22,7 @@ export default function PreviewPage(props) {
   const [sender, setSender] = useState(null);
   const [videoInfo, setVideoInfo] = useState(null);
   const [headerMenu, setHeaderMenu] = useState(null);
+  const [platform, setPlatform] = useState("");
 
   useEffect(() => {
     // Check if orderNumber is valid
@@ -29,6 +30,23 @@ export default function PreviewPage(props) {
       if (!valid) {
         alert("系統查無您的訂單，請聯繫客服。");
       } else {
+        // Get Platform Info
+        navigator.userAgentData
+          .getHighEntropyValues([
+            "architecture",
+            "model",
+            "platform",
+            "platformVersion",
+            "uaFullVersion",
+          ])
+          .then((ua) => {
+            console.log(ua);
+            if (ua.platform) {
+              console.log(ua.platform);
+              setPlatform(ua.platform);
+            }
+          });
+
         // Get Order Info
         GetOrderInfo(orderNumber)
           .then((oInfo) => setOrderInfo(oInfo))
@@ -38,7 +56,7 @@ export default function PreviewPage(props) {
         GetPassword(orderNumber)
           .then((pw) => {
             if (pw) {
-              GetVideoInfo(pw)
+              GetPreviewVideoInfo(pw)
                 .then((vInfo) => {
                   setVideoInfo(vInfo);
                 })
@@ -67,7 +85,7 @@ export default function PreviewPage(props) {
         name: wording[props.lang]["gift-intro-and-blockchain"],
         id: "gift-info",
         show: true,
-      },      
+      },
       { name: wording[props.lang]["brand-intro"], id: "brand", show: true },
     ]);
   }, [props.lang]);
@@ -82,6 +100,7 @@ export default function PreviewPage(props) {
         greetText={greetText}
         preview={true}
         lang={props.lang}
+        platform={platform}
       ></GreetCard>
       <GiftInfo item={null} orderInfo={orderInfo} lang={props.lang}></GiftInfo>
       <BrandIntro lang={props.lang}></BrandIntro>

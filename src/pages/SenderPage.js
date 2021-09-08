@@ -17,7 +17,7 @@ import {
   GetPassword,
   GetOrderInfo,
   GetText,
-  GetVideoInfo,
+  GetPreviewVideoInfo,
   VideoUploadInstance,
   VideoPreviewUrl,
   UploadGift,
@@ -27,6 +27,7 @@ import {
   GetReturnVideoInfo,
   GetReturnText,
   GetReturnCardExist,
+  /*otherPlatform,*/
 } from "../api/gift";
 
 import {
@@ -38,6 +39,7 @@ import {
   Tabs,
   Form,
   ProgressBar,
+  Spinner,
 } from "react-bootstrap";
 
 function OrderInfo(props) {
@@ -269,6 +271,9 @@ function CardForm(props) {
   const [videoInfo, setVideoInfo] = useState(null);
   const [greetText, setGreetText] = useState("");
   const [uploadProgress, setUploadProgress] = useState(null);
+  const [videoConverting, setVideoConverting] = useState(false);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [cardSaving, setCardSaving] = useState(false);
   const hiddenFileInput = React.useRef(null);
   useEffect(() => {
     if (props.show) {
@@ -277,6 +282,22 @@ function CardForm(props) {
       if (props.greetText) setGreetText(props.greetText);
     }
   }, [props.sender, props.videoInfo, props.greetText, props.show]);
+
+  useEffect(() => {
+    var vid_u = null;
+    if (videoInfo && videoInfo.fileId && !videoInfo.exception) {
+      if (videoInfo.standardDefinition) vid_u = videoInfo.standardDefinition;
+      else if (videoInfo.highDefinition) vid_u = videoInfo.highDefinition;
+      else vid_u = VideoPreviewUrl(videoInfo.fileId);
+      /*else if (
+        props.platform.toLowerCase() === "windows" ||
+        props.platform.toLowerCase() === "android"
+      )
+        vid_u = VideoPreviewUrl(videoInfo.fileId);
+      else vid_u = otherPlatform;*/
+    }
+    setVideoUrl(vid_u);
+  }, [videoInfo, props.platform]);
 
   if (!props.show) {
     return null;
@@ -290,33 +311,117 @@ function CardForm(props) {
     setGreetText(event.target.value);
   }
 
-  function videoHandelChange(event) {
+  function videoHandleChange(event) {
+    if (event.target.files.length <= 0) {
+      alert(wording[props.lang]["no-file"]);
+      return;
+    }
+
+    var nameLength = event.target.files[0].name.length;
+    if (nameLength > 300) {
+      alert(
+        wording[props.lang]["name-length-exceeded-part-1"] +
+          nameLength.toString() +
+          wording[props.lang]["name-length-exceeded-part-2"]
+      );
+      return;
+    }
+
+    var extension = event.target.files[0].name.split(".").pop().toLowerCase();
+    if (extension !== "mp4" && extension !== "mov") {
+      alert(
+        wording[props.lang]["extension-violation-part-1"] +
+          extension +
+          wording[props.lang]["extension-violation-part-2"]
+      );
+      return;
+    }
+
+    var size = event.target.files[0].size;
+    if (size > 20971520) {
+      alert(
+        wording[props.lang]["file-size-exceeded-part-1"] +
+          (Math.round((100 * size) / 1024 / 1024) / 100).toString() +
+          wording[props.lang]["file-size-exceeded-part-2"]
+      );
+      return;
+    }
+
     let formData = new FormData();
-    if (event.target.files.length > 0) {
-      alert(event.target.files[0].name);
-      alert(event.target.files[0].name.split(".").pop());
-      if (event.target.files[0].name.split(".").pop().toLowerCase() === "mp4") {
-        if (event.target.files[0].size < 20971520) {
-          formData.append("file", event.target.files[0]);
-          VideoUploadInstance.post("", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            onUploadProgress: (data) => {
-              //Set the progress value to show the progress bar
-              setUploadProgress(Math.round((100 * data.loaded) / data.total));
-            },
-          }).then((response) => {
-            console.log(response.data);
-            setVideoInfo(response.data);
-          });
-        } else alert("影片檔案需小於 20 MB");
-      } else alert("僅支援 .mp4 影片格式");
-    } else alert("檔案為空");
+
+    formData.append("file", event.target.files[0]);
+    VideoUploadInstance.post("", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (data) => {
+        //Set the progress value to show the progress bar
+        setUploadProgress(Math.round((100 * data.loaded) / data.total));
+        if (Math.round((100 * data.loaded) / data.total) >= 99)
+          setVideoConverting(true);
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setVideoConverting(false);
+        if (!response.data.exception) {
+          setVideoInfo(response.data);
+          /*if (props.platform !== otherPlatform) setVideoInfo(response.data);
+              else {
+                const validateUser = (user) => !!user;
+                const POLL_INTERVAL = 1000;
+                const pollForNewUser = poll({
+                  fn: mockApi,
+                  validate: validateUser,
+                  interval: POLL_INTERVAL,
+                })
+                  .then((user) => console.log(user))
+                  .catch((err) => console.error(err));
+              }*/
+        } else {
+          alert(wording[props.lang]["video-upload-failed"]);
+          setUploadProgress(null);
+        }
+      })
+      .catch((err) => {
+        alert(wording[props.lang]["video-upload-failed"]);
+        setUploadProgress(null);
+      });
   }
 
   function submitHandler(event) {
     event.preventDefault(); //prevent the form from submitting
+
+    if (!props.orderNumber) {
+      alert(wording[props.lang]["empty-order-number"]);
+      return;
+    }
+
+    if (!sender) {
+      alert(
+        wording[props.lang]["required-column-part-1"] +
+          wording[props.lang]["sender-name"] +
+          wording[props.lang]["required-column-part-2"]
+      );
+      return;
+    }
+
+    if (!videoInfo || !videoInfo.fileId) {
+      alert(wording[props.lang]["upload-video-first"]);
+      return;
+    }
+
+    if (!greetText) {
+      alert(
+        wording[props.lang]["required-column-part-1"] +
+          wording[props.lang]["greet-content"] +
+          wording[props.lang]["required-column-part-2"]
+      );
+      return;
+    }
+
+    setCardSaving(true);
+
     UploadGift({
       orderNumber: props.orderNumber,
       videoID: videoInfo.fileId,
@@ -325,7 +430,7 @@ function CardForm(props) {
     })
       .then((response) => {
         console.log(response);
-
+        setCardSaving(false);
         confirmAlert({
           title:
             wording[props.lang]["gcard-sent-part-1"] +
@@ -336,12 +441,13 @@ function CardForm(props) {
           message: wording[props.lang]["ask-for-preview"],
           buttons: [
             {
-              label: wording[props.lang]["agree-preview"],
-              onClick: () => window.open("/preview/" + props.orderNumber),
-            },
-            {
               label: wording[props.lang]["refuse-preview"],
               onClick: () => {},
+            },
+            {
+              label: wording[props.lang]["agree-preview"],
+              onClick: () =>
+                window.open("/preview/" + props.orderNumber, "_self"),
             },
           ],
         });
@@ -349,6 +455,7 @@ function CardForm(props) {
       .catch((err) => {
         alert(wording[props.lang]["gcard-save-fail"]);
         console.error(err);
+        setCardSaving(false);
       });
   }
 
@@ -367,7 +474,7 @@ function CardForm(props) {
               <Button
                 size="sm"
                 variant="secondary"
-                onClick={exambleOnclick.bind(null, item)}
+                onClick={exampleOnclick.bind(null, item)}
               >
                 {item}
               </Button>
@@ -378,7 +485,7 @@ function CardForm(props) {
     );
   };
 
-  const exambleOnclick = (type) => {
+  const exampleOnclick = (type) => {
     var items = exampleGreets[props.lang][type];
     setGreetText(items[Math.floor(Math.random() * items.length)]);
   };
@@ -400,13 +507,7 @@ function CardForm(props) {
       <h6>{wording[props.lang]["gcard-instant-preview"]}</h6>
       <CardTemplate1
         sender={sender}
-        videoUrl={
-          videoInfo && videoInfo.fileId
-            ? videoInfo.standardDefinition
-              ? videoInfo.standardDefinition
-              : VideoPreviewUrl(videoInfo.fileId)
-            : null
-        }
+        videoUrl={videoUrl}
         greetText={greetText}
         returnCard={false}
         lang={props.lang}
@@ -433,33 +534,41 @@ function CardForm(props) {
           <br />
           <Button size="sm" variant="danger" onClick={handleClick}>
             <AiFillCamera />
-            {wording[props.lang]["shooting-now"]}
+            {wording[props.lang]["shooting-now"]} / <AiFillFolderOpen />
+            {wording[props.lang]["choose-file"]}
           </Button>
           <input
             type="file"
-            accept=".mp4"
+            accept=".mp4, .mov"
             capture
             ref={hiddenFileInput}
-            onChange={videoHandelChange}
+            onChange={videoHandleChange}
             style={{ display: "none" }}
           />{" "}
-          or{" "}
+          {/*or{" "}
           <Button size="sm" variant="primary" onClick={handleClick}>
             <AiFillFolderOpen />
             {wording[props.lang]["choose-file"]}
           </Button>
           <input
             type="file"
-            accept=".mp4"
+            accept=".mp4, .mov"
             ref={hiddenFileInput}
             onChange={videoHandelChange}
             style={{ display: "none" }}
-          />
+          />*/}
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
-          {uploadProgress === 100 && (
-            <p>{wording[props.lang]["upload-vid-complete"]}</p>
+          {videoConverting && (
+            <p>
+              <b>{wording[props.lang]["video-converting"]}</b>
+            </p>
+          )}
+          {uploadProgress === 100 && !videoConverting && (
+            <p>
+              <b>{wording[props.lang]["upload-vid-complete"]}</b>
+            </p>
           )}
         </Form.Group>
 
@@ -478,10 +587,25 @@ function CardForm(props) {
         </Form.Group>
         <br />
         <br />
+        <br />
         <div className="cf-buttons-div">
-          <Button variant="success" type="submit">
-            {wording[props.lang]["save-and-send"]}
-          </Button>
+          {!cardSaving && (
+            <Button variant="success" type="submit">
+              {wording[props.lang]["save-and-send"]}
+            </Button>
+          )}
+          {cardSaving && (
+            <Button variant="success" disabled>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              Loading...
+            </Button>
+          )}
         </div>
       </Form>
     </div>
@@ -489,12 +613,28 @@ function CardForm(props) {
 }
 
 function ShowFeedback(props) {
-  const videoUrl =
-    props.videoInfo && props.videoInfo.standardDefinition
-      ? props.videoInfo.standardDefinition
-      : props.videoInfo && props.videoInfo.fileId
-      ? VideoPreviewUrl(props.videoInfo.fileId)
-      : null;
+  const [videoUrl, setVideoUrl] = useState(null);
+  useEffect(() => {
+    var vid_u = null;
+    if (
+      props.videoInfo &&
+      props.videoInfo.fileId &&
+      !props.videoInfo.exception
+    ) {
+      if (props.videoInfo.standardDefinition)
+        vid_u = props.videoInfo.standardDefinition;
+      else if (props.videoInfo.highDefinition)
+        vid_u = props.videoInfo.highDefinition;
+      else vid_u = VideoPreviewUrl(props.videoInfo.fileId);
+      /*else if (
+        props.platform.toLowerCase() === "windows" ||
+        props.platform.toLowerCase() === "android"
+      )
+        vid_u = VideoPreviewUrl(props.videoInfo.fileId);
+      else vid_u = otherPlatform;*/
+    }
+    setVideoUrl(vid_u);
+  }, [props.videoInfo /*, props.platform*/]);
 
   return (
     <div className="sf-div" id="receiver-feedback">
@@ -537,7 +677,8 @@ export default function SenderPage(props) {
   const [headerMenu, setHeaderMenu] = useState(null);
   const [viewNumber, setViewNumber] = useState(0);
   const [returnCardExist, setReturnCardExist] = useState(false);
-  const viewNumberThresh = 999;
+  const [platform, setPlatform] = useState("");
+  const viewNumberThresh = 1;
 
   const [show, setShow] = useState(true);
 
@@ -551,6 +692,23 @@ export default function SenderPage(props) {
       if (!valid) {
         alert(wording[props.lang]["order-not-found"]);
       } else {
+        // Get Platform Info
+        navigator.userAgentData
+          .getHighEntropyValues([
+            "architecture",
+            "model",
+            "platform",
+            "platformVersion",
+            "uaFullVersion",
+          ])
+          .then((ua) => {
+            console.log(ua);
+            if (ua.platform) {
+              console.log(ua.platform);
+              setPlatform(ua.platform);
+            }
+          });
+
         // Get Order Info
         GetOrderInfo(orderNumber)
           .then((oInfo) => setOrderInfo(oInfo))
@@ -566,8 +724,9 @@ export default function SenderPage(props) {
                   setViewNumber(vNumber);
                   if (vNumber < viewNumberThresh) {
                     // Get Greet Card Info.
-                    GetVideoInfo(pw)
+                    GetPreviewVideoInfo(pw)
                       .then((vInfo) => {
+                        console.log(vInfo);
                         setVideoInfo(vInfo);
                       })
                       .catch((err) => console.error(err));
@@ -685,7 +844,9 @@ export default function SenderPage(props) {
         ></OrderInfo>
         <Illustration
           receiver={
-            orderInfo && orderInfo.receiver ? orderInfo.receiver : "收禮者"
+            orderInfo && orderInfo.receiver
+              ? orderInfo.receiver
+              : wording[props.lang]["receiver"]
           }
           lang={props.lang}
         ></Illustration>
@@ -703,6 +864,7 @@ export default function SenderPage(props) {
           videoInfo={videoInfo}
           greetText={greetText}
           lang={props.lang}
+          platform={platform}
         ></CardForm>
         <BrandIntro lang={props.lang}></BrandIntro>
       </div>
@@ -713,7 +875,9 @@ export default function SenderPage(props) {
         <Header menu={headerMenu}></Header>
         <ShowFeedback
           receiver={
-            orderInfo && orderInfo.receiver ? orderInfo.receiver : "收禮者"
+            orderInfo && orderInfo.receiver
+              ? orderInfo.receiver
+              : wording[props.lang]["receiver"]
           }
           viewNumber={viewNumber}
           returnCardExist={returnCardExist}
@@ -721,6 +885,7 @@ export default function SenderPage(props) {
           videoInfo={videoInfo}
           greetText={greetText}
           lang={props.lang}
+          platform={platform}
         ></ShowFeedback>
         <OrderInfo
           show={isONValid}

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./GreetCard.css";
 import CardTemplate1 from "./CardTemplates/CardTemplate1";
 import { Button, Tooltip, OverlayTrigger, Form } from "react-bootstrap";
-import { VideoPreviewUrl } from "../api/gift";
+import { VideoPreviewUrl /*, otherPlatform*/ } from "../api/gift";
 import { wording } from "../wording";
 
 function EnterCode(props) {
@@ -96,12 +96,29 @@ function EnterCode(props) {
 }
 
 export default function GreetCard(props) {
-  const videoUrl =
-    props.videoInfo && props.videoInfo.fileId
-      ? props.videoInfo.standardDefinition
-        ? props.videoInfo.standardDefinition
-        : VideoPreviewUrl(props.videoInfo.fileId)
-      : null;
+  const [videoUrl, setVideoUrl] = useState(null);
+
+  useEffect(() => {
+    var vid_u = null;
+    if (
+      props.videoInfo &&
+      props.videoInfo.fileId &&
+      !props.videoInfo.exception
+    ) {
+      if (props.videoInfo.standardDefinition)
+        vid_u = props.videoInfo.standardDefinition;
+      else if (props.videoInfo.highDefinition)
+        vid_u = props.videoInfo.highDefinition;
+      else vid_u = VideoPreviewUrl(props.videoInfo.fileId);
+      /*else if (
+        props.platform.toLowerCase() === "windows" ||
+        props.platform.toLowerCase() === "android"
+      )
+        vid_u = VideoPreviewUrl(props.videoInfo.fileId);
+      else vid_u = otherPlatform;*/
+    }
+    setVideoUrl(vid_u);
+  }, [props.videoInfo /*, props.platform*/]);
 
   return (
     <div className="gc-div" id="greet-card">

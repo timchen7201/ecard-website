@@ -37,8 +37,8 @@ export const wording = {
     "gcard-sent-part-1": "您製作給",
     "gcard-sent-part-2": "的賀卡已成功寄出！",
     "ask-for-preview": "是否預覽完稿頁面？",
-    "agree-preview": "是，開啟預覽頁",
-    "refuse-preview": "否，留在本頁",
+    "agree-preview": "完稿預覽",
+    "refuse-preview": "繼續編輯",
     "gcard-save-fail": "賀卡儲存失敗，請聯繫客服人員，謝謝！",
     "use-example": "套用範本",
     "order-not-found": "系統查無您的訂單，請聯繫客服。",
@@ -87,9 +87,24 @@ export const wording = {
     "new-house": "新居",
     birthday: "生日",
     "new-year": "新年",
-    "shooting-now":"立即拍攝",
-    "choose-file":"選擇檔案",
-    "vertical-vid-hint":"(為畫面效果，儘量選用「直式」影片)"
+    "shooting-now": "錄製",
+    "choose-file": "檔案",
+    "vertical-vid-hint": "(為畫面效果，儘量選用「直式」影片)",
+    "video-converting": "影片尚在轉檔中，請稍候",
+    "video-upload-failed":
+      "此影片上傳失敗，請嘗試其他影片。\n或請洽客服人員，謝謝。",
+    "no-file": "未選擇檔案",
+    "name-length-exceeded-part-1": "檔名長度需小於 300 字元\n您的檔名長度達 ",
+    "name-length-exceeded-part-2": " 字元",
+    "extension-violation-part-1":
+      "僅支援 .mp4 或 .MOV 影片格式\n您上傳的影片格式為 .",
+    "extension-violation-part-2": "",
+    "file-size-exceeded-part-1": "影片檔案需小於 20 MB\n您上傳的檔案大小達 ",
+    "file-size-exceeded-part-2": " MB",
+    "empty-order-number": "訂單編號不得為空值",
+    "required-column-part-1": "「",
+    "required-column-part-2": "」為必填欄位",
+    "upload-video-first": "請先上傳影片",
   },
   jp: {
     "title-line-1": "ブロックチェーン",
@@ -130,8 +145,8 @@ export const wording = {
     "gcard-sent-part-1": "",
     "gcard-sent-part-2": "のために、作られたお祝いカードは送信成功！",
     "ask-for-preview": "完成したページをプレビューしますか？",
-    "agree-preview": "はい、プレビューページを開きます",
-    "refuse-preview": "いいえ、そのままこのページにします",
+    "agree-preview": "プレビュー",
+    "refuse-preview": "続けて編集する",
     "gcard-save-fail":
       "お祝いカードが保存できません、カスタマーサービスにお問い合わせください",
     "use-example": "範例を使用します",
@@ -186,9 +201,27 @@ export const wording = {
     "new-house": "新居お祝い",
     birthday: "お誕生日お祝い",
     "new-year": "新年お祝い",
-    "shooting-now":"今から撮影する。",
-    "choose-file":"データを選択する。",
-    "vertical-vid-hint":"(画面効果については、「ストレート」ビデオを選択してみてください)"
+    "shooting-now": "今から撮影する。",
+    "choose-file": "データを選択する。",
+    "vertical-vid-hint":
+      "(画面効果については、「ストレート」ビデオを選択してみてください)",
+    "video-converting": "動画を変換しております。暫くお待ちください。",
+    "video-upload-failed":
+      "動画のアップロードに失敗しました。他の動画にて再度アップロードするかカスタマーセンターにお問い合わせください。宜しくお願い致します。",
+    "no-file": "ファイルを選択しておりません。",
+    "name-length-exceeded-part-1":
+      "ファイル名は300文字以内となります。\nファイル名が ",
+    "name-length-exceeded-part-2": " 字ですので対応不可となります。",
+    "extension-violation-part-1":
+      "対応する拡張子は .mp4 又は .MOV となります。\nあなたのアップロードしたファイルは .",
+    "extension-violation-part-2": " となり対応不可となります。",
+    "file-size-exceeded-part-1":
+      "対応する動画のサイズは 20 MB 以下となります。\nあなたのアップロードした動画は ",
+    "file-size-exceeded-part-2": " MB となり対応不可となります。",
+    "empty-order-number": "注文番号は必ず記載してください。",
+    "required-column-part-1": "「",
+    "required-column-part-2": "」の部分は必ず記載してください。",
+    "upload-video-first": "先に動画をアップロードしてください。",
   },
 };
 
