@@ -31,7 +31,7 @@ export default function PreviewPage(props) {
         alert("系統查無您的訂單，請聯繫客服。");
       } else {
         // Get Platform Info
-        navigator.userAgentData
+        /*navigator.userAgentData
           .getHighEntropyValues([
             "architecture",
             "model",
@@ -45,7 +45,7 @@ export default function PreviewPage(props) {
               console.log(ua.platform);
               setPlatform(ua.platform);
             }
-          });
+          });*/
 
         // Get Order Info
         GetOrderInfo(orderNumber)

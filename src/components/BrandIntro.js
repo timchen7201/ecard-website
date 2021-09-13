@@ -31,7 +31,8 @@ export default function BrandIntro(props) {
       </h2>
       <br />
       <div className="bi-carousel">
-        <Carousel responsive={responsive}>
+        {/*<Carousel responsive={responsive}>*/}
+        {props.domestic && (
           <div className="bi-cr-item">
             <table className="bi-table">
               <tbody>
@@ -82,6 +83,8 @@ export default function BrandIntro(props) {
               </tbody>
             </table>
           </div>
+        )}
+        {!props.domestic && (
           <div className="bi-cr-item">
             <table className="bi-table">
               <tbody>
@@ -103,7 +106,8 @@ export default function BrandIntro(props) {
               </tbody>
             </table>
           </div>
-        </Carousel>
+        )}
+        {/*</Carousel>*/}
       </div>
     </div>
   );

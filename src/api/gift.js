@@ -352,7 +352,7 @@ const detailDict = {
       productName: "楊媽媽 翠玉文旦",
       "media-info": "vid",
       "vid-link":
-        "https://storage.googleapis.com/agchain/52d5fc9d-4f91-426c-997d-4003fc564302-720p.mp4",
+        "https://storage.googleapis.com/agchain/5afd783f-9142-4385-aa98-f06938b40ddb-720p.mp4",
       productPhoto: require("../img/pomelo/pomelo.jpg").default,
       productText:
         "臺灣東部花蓮縣—瑞穗鄉，北緯23.5°，在海岸山脈中央山脈之間的花東縱谷。廣植文旦達800公頃，位居全國之冠，文旦品質良好，酸甜比例風味佳。楊媽媽耕耘著山腳下這片充滿石墨玉的土地，孕育出翠綠如玉的「翠玉文旦」。 文旦園位於中央山脈支脈虎頭山腳下，50年前，每遇上大雨颱風，伴隨土石沖刷而下，將田地瞬間變成河床，也順道沖下珍貴的—石墨玉。 從滿地的石頭開始，楊媽媽一點一滴耕耘著，這片充滿石墨玉的土地，逐步變成結實纍纍的柚園，孕育出翠綠如玉的文旦柚。 翠玉文旦果肉晶瑩剔透，酸中帶甜，酸甜比例風味絕佳，富含蛋白質、纖維及多種維生素。 每年秋天，白露節氣前十日採收，大約是在8/25-30期間採收，翠綠如玉的果實，成為中秋佳節中的最佳風味。 文旦離株採收後會開始辭水，也就是外表油包的風味會透過辭水進入柚肉，提高文旦柚肉甜味。最佳賞味期就是辭水的10-14天期間。",
@@ -370,13 +370,14 @@ const detailDict = {
         require("../img/pomelo/certificates/certificate/4.jpg").default,
         require("../img/pomelo/certificates/certificate/5.jpg").default,
       ],
-      "vid-poster": require("../img/pomelo/vid-poster.png").default,
+      // "vid-poster": require("../img/pomelo/vid-poster.png").default,
+      "vid-poster": "",
     },
     jp: {
       productName: "鶴岡ひすい文旦",
       "media-info": "vid",
       "vid-link":
-        "https://storage.googleapis.com/agchain/52d5fc9d-4f91-426c-997d-4003fc564302-720p.mp4",
+        "https://storage.googleapis.com/agchain/5e38bfba-82b1-421b-8e47-abbe2a080b98-720p.mp4",
       productPhoto: require("../img/pomelo/pomelo.jpg").default,
       productText:
         "台湾の一番高い山脈の中央山脈の間に、 “花東縱谷”というところがあり、\
@@ -408,7 +409,8 @@ const detailDict = {
         require("../img/pomelo/certificates/certificate/4.jpg").default,
         require("../img/pomelo/certificates/certificate/5.jpg").default,
       ],
-      "vid-poster": require("../img/pomelo/vid-poster.png").default,
+      // "vid-poster": require("../img/pomelo/vid-poster.png").default,
+      "vid-poster": "",
     },
   },
 };

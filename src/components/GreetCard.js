@@ -98,6 +98,8 @@ function EnterCode(props) {
 export default function GreetCard(props) {
   const [videoUrl, setVideoUrl] = useState(null);
 
+  useEffect(() => {}, [props.pwEntered]);
+
   useEffect(() => {
     var vid_u = null;
     if (
@@ -118,7 +120,7 @@ export default function GreetCard(props) {
       else vid_u = otherPlatform;*/
     }
     setVideoUrl(vid_u);
-  }, [props.videoInfo /*, props.platform*/]);
+  }, [props.pwEntered, props.videoInfo /*, props.platform*/]);
 
   return (
     <div className="gc-div" id="greet-card">

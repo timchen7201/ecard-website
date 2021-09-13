@@ -693,7 +693,7 @@ export default function SenderPage(props) {
         alert(wording[props.lang]["order-not-found"]);
       } else {
         // Get Platform Info
-        navigator.userAgentData
+        /*navigator.userAgentData
           .getHighEntropyValues([
             "architecture",
             "model",
@@ -707,7 +707,7 @@ export default function SenderPage(props) {
               console.log(ua.platform);
               setPlatform(ua.platform);
             }
-          });
+          });*/
 
         // Get Order Info
         GetOrderInfo(orderNumber)

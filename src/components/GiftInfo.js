@@ -63,9 +63,13 @@ function GiftDetail(props) {
       </h4>
       {productInfo["media-info"] === "vid" && (
         <div className="gd-jp-div">
-          <video className="gd-vid" poster={productInfo["vid-poster"]} controls>
-            <source src={productInfo["vid-link"]} type="video/mp4" />
-          </video>
+          <video
+            className="gd-vid"
+            poster={productInfo["vid-poster"]}
+            controls
+            src={productInfo["vid-link"] + "#t=0.1"}
+            preload="auto"
+          ></video>
           <p className="gd-text">{productInfo.productText}</p>
         </div>
       )}

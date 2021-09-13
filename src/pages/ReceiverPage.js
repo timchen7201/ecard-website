@@ -360,7 +360,7 @@ export default function ReceiverPage(props) {
           alert(wording[props.lang]["enter-code-error"]);
         } else {
           // Get Platform Info
-          navigator.userAgentData
+          /*navigator.userAgentData
             .getHighEntropyValues([
               "architecture",
               "model",
@@ -374,7 +374,7 @@ export default function ReceiverPage(props) {
                 console.log(ua.platform);
                 setPlatform(ua.platform);
               }
-            });
+            });*/
 
           // Get Greet Card Info.
           GetVideoInfo(pw)
@@ -415,6 +415,8 @@ export default function ReceiverPage(props) {
       });
     }
   };
+
+  useEffect(() => {}, [password]);
 
   useEffect(() => {
     setHeaderMenu([
@@ -472,7 +474,7 @@ export default function ReceiverPage(props) {
         lang={props.lang}
         platform={platform}
       ></CardForm>
-      <BrandIntro lang={props.lang}></BrandIntro>
+      <BrandIntro lang={props.lang} domestic={props.domestic}></BrandIntro>
     </div>
   );
 }
