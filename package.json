@@ -10,6 +10,7 @@
     "@vime/react": "^5.0.30",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "caniuse-lite": "^1.0.30001284",
     "filepond": "^4.23.1",
     "filepond-plugin-file-validate-type": "^1.2.6",
     "filepond-plugin-image-preview": "^4.6.6",

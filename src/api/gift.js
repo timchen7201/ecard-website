@@ -233,6 +233,8 @@ const itemProductsMap = (item) => {
       return ["銷日荔枝"];
     case "pomelo":
       return ["銷日文旦"];
+    case "dragonfruit":
+      return ["銷日火龍果"];
     default:
       return null;
   }
@@ -245,7 +247,7 @@ const detailDict = {
       "media-info": "vid",
       "vid-link":
         "https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4",
-      productPhoto: require("../img/mango.jpg").default,
+      productPhoto: require("../img/mango/mango.jpg").default,
       productText:
         "芒果屬熱帶水果,喜愛高溫、陽光充足的環境。而屏東位於台灣的最南端,氣候上屬熱帶季風氣候,因地理位置靠海,位於北緯2240度,三面環海:東靠太平洋、南接巴士海峽、西鄰臺灣海峽,又有黑潮經過,有大量海鮮出產,也是養殖漁 業重鎮,因此使用龍蝦殼經菌肥分解成甲殼素及鈣 後,有效提供芒果栽培應用。由土壤吸收及葉面施肥,加上陽光充足又有 海風的吹拂,有利於芒果的生長結果,因此種出來 的芒果外觀鮮紅亮麗,果肉經吸收充足的甲殼素與 鈣,果肉扎實甜度高、風味濃郁。",
       farmName: "台鼎龍蝦芒果農場",
@@ -253,9 +255,14 @@ const detailDict = {
       farmText:
         "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
       certificates: [
-        require("../img/mango-certificate-1.jpg").default,
-        require("../img/mango-certificate-2.jpg").default,
-        require("../img/mango-certificate-3.jpg").default,
+        require("../img/mango/certificates/resume/1.jpg").default,
+        require("../img/mango/certificates/resume/2.jpg").default,
+        require("../img/mango/certificates/resume/3.jpg").default,
+        require("../img/mango/certificates/resume/4.jpg").default,
+        require("../img/mango/certificates/resume/5.jpg").default,
+        require("../img/mango/certificates/certificate/1.jpg").default,
+        require("../img/mango/certificates/certificate/2.jpg").default,
+        require("../img/mango/certificates/certificate/3.jpg").default,
       ],
       "vid-poster": null,
     },
@@ -264,7 +271,7 @@ const detailDict = {
       "media-info": "vid",
       "vid-link":
         "https://storage.googleapis.com/agchain/80f106ea-8811-42c4-9bdd-a9665f785e7b-720p.mp4",
-      productPhoto: require("../img/mango.jpg").default,
+      productPhoto: require("../img/mango/mango.jpg").default,
       productText:
         "マンゴーはトロピカルフルーツで、高温かつ日差しが十分に浴びれる場所を好みます。ロブスターマンゴーは台湾最南端の屏東で生産され、そこはマンゴーの成長に適した熱帯性気候であり、三面は海に囲まれ大量の海鮮が\
         獲れて、養殖業の拠点でもある。ご当地のロブスターの殻を菌体肥料による分解を行い、キチン質とカルシウムにした後、マンゴー栽培の養分の一種にしました。\
@@ -278,9 +285,14 @@ const detailDict = {
       farmText:
         "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
       certificates: [
-        require("../img/mango-certificate-1.jpg").default,
-        require("../img/mango-certificate-2.jpg").default,
-        require("../img/mango-certificate-3.jpg").default,
+        require("../img/mango/certificates/resume/1.jpg").default,
+        require("../img/mango/certificates/resume/2.jpg").default,
+        require("../img/mango/certificates/resume/3.jpg").default,
+        require("../img/mango/certificates/resume/4.jpg").default,
+        require("../img/mango/certificates/resume/5.jpg").default,
+        require("../img/mango/certificates/certificate/1.jpg").default,
+        require("../img/mango/certificates/certificate/2.jpg").default,
+        require("../img/mango/certificates/certificate/3.jpg").default,
       ],
       "vid-poster": null,
     },
@@ -394,6 +406,60 @@ const detailDict = {
         require("../img/pomelo/certificates/certificate/3.jpg").default,
         require("../img/pomelo/certificates/certificate/4.jpg").default,
         require("../img/pomelo/certificates/certificate/5.jpg").default,
+      ],
+      // "vid-poster": require("../img/pomelo/vid-poster.png").default,
+      "vid-poster": "",
+    },
+  },
+  銷日火龍果: {
+    "zh-tw": {
+      productName: "大龍王 火龍果",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/c72d9187-5026-4f2a-b3ff-b8abced3644d-720p.mp4",
+      productPhoto: require("../img/dragonfruit/dragonfruit.jpg").default,
+      productText:
+        "飽滿、火紅的紅龍果外銷加拿大,大龍王火龍果近幾年不單只提供台灣市場,更將台灣優良的水果品質讓世界知道。\n\
+        蜜寶火龍果達人-劉世權種植紅龍果已經20年了,直率的劉老闆說起紅龍果的種植流程鉅細靡遺,如今兒子也加入紅龍果的生產流程準備接班家族產業。\n\
+        觀顛覆傳統念,蜜寶火龍果能在冬天也能有如此大量的產出皆出自於劉老闆多年的經驗。\n\
+        近年與清華大學合作導入AI至生產流程,讓冬產火龍果的品質以及產量更佳的穩定,未來屏東縣政府將以大龍王農場作為範本,將大龍王農場的成功經驗導入其他農場,以平衡夏冬兩季果實產量不平均的問題也更能穩定價格。\n\
+        在台灣擁有20幾座成功農場經驗的清華大學電機系的協助下,大龍王的種植技術以及AI的應用,讓大龍王農場受到東南亞政府的青睞,成為台灣首座打進印尼生產流程的智慧農場\n\
+        在東北亞地區幾乎沒有熱帶水果種植地,因此火龍果幾乎是供不應求的,而台灣所生產的火龍果無論是在品質以及口感在主要的東南亞生產區中遙遙領先。\n\
+        未來談到大龍王火龍果園不單只是精品水果的產地,更是將台灣的水果揚名國際的品牌。",
+      farmName: "台鼎龍蝦芒果農場",
+      farmPhoto: require("../img/mango-farm.jpg").default,
+      farmText:
+        "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
+      certificates: [
+        require("../img/dragonfruit/certificates/1.jpeg").default,
+        require("../img/dragonfruit/certificates/2.jpeg").default,
+        require("../img/dragonfruit/certificates/3.jpeg").default,
+      ],
+      // "vid-poster": require("../img/pomelo/vid-poster.png").default,
+      "vid-poster": "",
+    },
+    jp: {
+      productName: "大龍王 火龍果",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/c72d9187-5026-4f2a-b3ff-b8abced3644d-720p.mp4",
+      productPhoto: require("../img/dragonfruit/dragonfruit.jpg").default,
+      productText:
+        "飽滿、火紅的紅龍果外銷加拿大,大龍王火龍果近幾年不單只提供台灣市場,更將台灣優良的水果品質讓世界知道。\n\
+        蜜寶火龍果達人-劉世權種植紅龍果已經20年了,直率的劉老闆說起紅龍果的種植流程鉅細靡遺,如今兒子也加入紅龍果的生產流程準備接班家族產業。\n\
+        觀顛覆傳統念,蜜寶火龍果能在冬天也能有如此大量的產出皆出自於劉老闆多年的經驗。\n\
+        近年與清華大學合作導入AI至生產流程,讓冬產火龍果的品質以及產量更佳的穩定,未來屏東縣政府將以大龍王農場作為範本,將大龍王農場的成功經驗導入其他農場,以平衡夏冬兩季果實產量不平均的問題也更能穩定價格。\n\
+        在台灣擁有20幾座成功農場經驗的清華大學電機系的協助下,大龍王的種植技術以及AI的應用,讓大龍王農場受到東南亞政府的青睞,成為台灣首座打進印尼生產流程的智慧農場\n\
+        在東北亞地區幾乎沒有熱帶水果種植地,因此火龍果幾乎是供不應求的,而台灣所生產的火龍果無論是在品質以及口感在主要的東南亞生產區中遙遙領先。\n\
+        未來談到大龍王火龍果園不單只是精品水果的產地,更是將台灣的水果揚名國際的品牌。",
+      farmName: "台鼎龍蝦芒果農場",
+      farmPhoto: require("../img/mango-farm.jpg").default,
+      farmText:
+        "台南縣唯一獲得有機認證種植金煌芒果的瑞林農場，每年的收成僅有其他同面積果園的十分之一，產品價格是他人的十倍，頂級品的金煌芒果禮盒，三顆就賣新台幣一千元，但在有機風潮引領下，還是獲得不少消費者青睞。",
+      certificates: [
+        require("../img/dragonfruit/certificates/1.jpeg").default,
+        require("../img/dragonfruit/certificates/2.jpeg").default,
+        require("../img/dragonfruit/certificates/3.jpeg").default,
       ],
       // "vid-poster": require("../img/pomelo/vid-poster.png").default,
       "vid-poster": "",
