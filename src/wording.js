@@ -87,8 +87,8 @@ export const wording = {
     "new-house": "新居",
     birthday: "生日",
     "new-year": "新年",
-    "shooting-now": "錄製",
-    "choose-file": "檔案",
+    "shooting-now": "錄製影片",
+    "choose-file": "選擇檔案",
     "vertical-vid-hint": "(為畫面效果，儘量選用「直式」影片)",
     "video-converting": "影片尚在轉檔中，請稍候",
     "video-upload-failed":
@@ -169,7 +169,7 @@ export const wording = {
     "cyber-security": "サイバーセキュリティ",
     "chia-wei": "商田実業有限会社",
     "chia-wei-intro":
-      "商田実業有限会社は日本およびその他の国からの高品質の農産物の輸入を専門とする会社です。台湾の高級デパートとスーパーに商品を提供させていただきます。",
+      "商田実業有限会社は台湾にある日本含む世界各国から高品質な農産物を輸出入している商社です。台湾の高級デパートやスーパー等に商品を供給しています。",
     "watch-gcard": "お祝いカードをご覧ください",
     "gift-intro-and-blockchain":
       "ギフト紹介＆ブロックチェーンのトレーサビリティ",

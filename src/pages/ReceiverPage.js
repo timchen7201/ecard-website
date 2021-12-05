@@ -256,8 +256,7 @@ function CardForm(props) {
           <br />
           <Button size="sm" variant="danger" onClick={handleClick}>
             <AiFillCamera />
-            {wording[props.lang]["shooting-now"]} or <AiFillFolderOpen />
-            {wording[props.lang]["choose-file"]}
+            {wording[props.lang]["shooting-now"]}
           </Button>
           <input
             type="file"
@@ -267,7 +266,7 @@ function CardForm(props) {
             onChange={videoHandleChange}
             style={{ display: "none" }}
           />{" "}
-          {/*or{" "}
+          or{" "}
           <Button size="sm" variant="primary" onClick={handleClick}>
             <AiFillFolderOpen />
             {wording[props.lang]["choose-file"]}
@@ -276,9 +275,9 @@ function CardForm(props) {
             type="file"
             accept=".mp4, .mov"
             ref={hiddenFileInput}
-            onChange={videoHandelChange}
+            onChange={videoHandleChange}
             style={{ display: "none" }}
-          /> */}
+          />
           {uploadProgress && (
             <ProgressBar now={uploadProgress} label={`${uploadProgress}%`} />
           )}
