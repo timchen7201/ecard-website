@@ -300,8 +300,10 @@ const detailDict = {
   銷日鳳梨: {
     "zh-tw": {
       productName: "金鑽鳳梨",
-      "media-info": "img",
-      productPhoto: require("../img/pineapple.jpg").default,
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/26dca087-93ba-4b4a-bf54-bd8178c3cb07-720p.mp4",
+      productPhoto: require("../img/pineapple/pineapple.jpg").default,
       productText:
         "「金鑽鳳梨」是台灣為人熟悉的品種，但其實台灣鳳梨有18個品種。而由於金鑽鳳梨酸甜平衡，纖維細小，產量穩定，因此備受追捧，台灣市面上接近9成均是金鑽鳳梨（台農17號）。",
       farmName: "傑農合作農場",
@@ -309,24 +311,25 @@ const detailDict = {
       farmText:
         "傑農合作農場擁有30年多年果品輸日經驗，所產果品皆通過農藥檢定合格，秉持著讓費者能吃的安心為信念，推廣優質水果。",
       certificates: [
-        require("../img/certificate.jpg").default,
-        require("../img/certificate.jpg").default,
+        require("../img/pineapple/certificates/certificate.jpg").default,
       ],
       "vid-poster": null,
     },
     jp: {
-      productName: "金鑽鳳梨",
-      "media-info": "img",
-      productPhoto: require("../img/pineapple.jpg").default,
+      productName: "台農17号 パイナップル",
+      "media-info": "vid",
+      "vid-link":
+        "https://storage.googleapis.com/agchain/26dca087-93ba-4b4a-bf54-bd8178c3cb07-720p.mp4",
+      productPhoto: require("../img/pineapple/pineapple.jpg").default,
       productText:
-        "「金鑽鳳梨」是台灣為人熟悉的品種，但其實台灣鳳梨有18個品種。而由於金鑽鳳梨酸甜平衡，纖維細小，產量穩定，因此備受追捧，台灣市面上接近9成均是金鑽鳳梨（台農17號）。",
+        "台湾から入荷するパインは主に台農17号という品種で樹の上で熟度をあげた完熟パインとなります。そのためとても甘いパインとなります。\n\
+        舌がヒリヒリしにくく、食べやすいパインと言われております。",
       farmName: "傑農合作農場",
       farmPhoto: require("../img/pineapple-farm.jpeg").default,
       farmText:
         "傑農合作農場擁有30年多年果品輸日經驗，所產果品皆通過農藥檢定合格，秉持著讓費者能吃的安心為信念，推廣優質水果。",
       certificates: [
-        require("../img/certificate.jpg").default,
-        require("../img/certificate.jpg").default,
+        require("../img/pineapple/certificates/certificate.jpg").default,
       ],
       "vid-poster": null,
     },
@@ -335,27 +338,27 @@ const detailDict = {
     "zh-tw": {
       productName: "玉荷包荔枝",
       "media-info": "img",
-      productPhoto: require("../img/lychee.jpg").default,
+      productPhoto: require("../img/lychee/lychee.jpg").default,
       productText:
-        "玉荷包是所有荔枝中最早熟之品種，而因果形如荷包，果肉如玉般而得名！具高焦核（果核扁小）、果肉多的特色，而且果肉Q而結實，多汁而甜度達20度以上，無論是果粒、品質、市價等級均居台灣現有荔枝品種之冠，可謂是真正的「妃子笑」珍貴品種！",
-      farmName: "方境合作社",
-      farmPhoto: require("../img/lychee-farm.jpg").default,
+        "玉荷包是荔枝的品種之一，產期在5月下旬至6月上旬。玉荷包外皮顏色較一般荔枝青綠，外觀紅透帶點綠，外皮扎扎刺刺的，果實顏色由綠轉紅（紅色帶微綠）時糖度最高，香氣濃郁，果肉豐厚肥碩 ，籽小濃郁多汁．甜度高，尾韻帶荔枝的微酸，風味比其他品種更好，且吃起來不膩，特別受到大家的喜愛。",
+      farmName: "",
+      farmPhoto: require("../img/lychee/lychee_2.jpg").default,
       farmText:
-        "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
-      certificates: [require("../img/certificate.jpg").default],
+        "採收後，全程冷藏空運宅配日本全地區，確保每顆玉荷包荔枝都是最新鮮。我們推出了珍貴的玉荷包荔枝禮盒，希望能讓台灣寶島的水果拓展到日本市場，更讓台灣農人的努力被世界看見！國際宅配禮盒，使用最高磅數牛皮紙製造包裝，質感超群，國際級禮盒質感，推薦企業跨國送禮到日本，傳達台灣心意！",
+      certificates: [require("../img/lychee/certificates/certificate.jpg").default],
       "vid-poster": null,
     },
     jp: {
-      productName: "玉荷包荔枝",
+      productName: "玉荷包ライチ",
       "media-info": "img",
-      productPhoto: require("../img/lychee.jpg").default,
+      productPhoto: require("../img/lychee/lychee.jpg").default,
       productText:
-        "玉荷包是所有荔枝中最早熟之品種，而因果形如荷包，果肉如玉般而得名！具高焦核（果核扁小）、果肉多的特色，而且果肉Q而結實，多汁而甜度達20度以上，無論是果粒、品質、市價等級均居台灣現有荔枝品種之冠，可謂是真正的「妃子笑」珍貴品種！",
-      farmName: "方境合作社",
-      farmPhoto: require("../img/lychee-farm.jpg").default,
+        "玉荷包はライチの一種で、生産期間は5月下旬から6月上旬です。台湾の気候は冬・春は乾燥し、夏・秋は雨が多く、ライチの成長に適しています。産地は中南部が中心です。主に、次の品種があります。玉荷包－これは肉質が繊細で、さくさく感と爽やかな甘さがあり、ほのかな香りと渋みが特徴です。",
+      farmName: "",
+      farmPhoto: require("../img/lychee/lychee_2.jpg").default,
       farmText:
-        "秉持「關懷土地」與「永續經營」的理念，堅持不用除草劑，使用機肥料，並特製成植物喝的優酪乳，成就一粒粒甜美多汁的玉荷包荔枝，果肉飽 滿、品質絕佳，一次又一次榮獲冠軍獎、特優獎、優良獎，並通過吉園圃安全認證，讓消費者吃得安心又健康。",
-      certificates: [require("../img/certificate.jpg").default],
+        "収穫後、最も新鮮になるように、プロセス全体が冷蔵され、日本全国に空輸されます。国際宅配ギフトボックスは、最高ポンドのクラフト紙を使用してパッケージを作成しています。",
+      certificates: [require("../img/lychee/certificates/certificate.jpg").default],
       "vid-poster": null,
     },
   },
@@ -445,13 +448,10 @@ const detailDict = {
         "https://storage.googleapis.com/agchain/c72d9187-5026-4f2a-b3ff-b8abced3644d-720p.mp4",
       productPhoto: require("../img/dragonfruit/dragonfruit.jpg").default,
       productText:
-        "飽滿、火紅的紅龍果外銷加拿大,大龍王火龍果近幾年不單只提供台灣市場,更將台灣優良的水果品質讓世界知道。\n\
-        蜜寶火龍果達人-劉世權種植紅龍果已經20年了,直率的劉老闆說起紅龍果的種植流程鉅細靡遺,如今兒子也加入紅龍果的生產流程準備接班家族產業。\n\
-        觀顛覆傳統念,蜜寶火龍果能在冬天也能有如此大量的產出皆出自於劉老闆多年的經驗。\n\
-        近年與清華大學合作導入AI至生產流程,讓冬產火龍果的品質以及產量更佳的穩定,未來屏東縣政府將以大龍王農場作為範本,將大龍王農場的成功經驗導入其他農場,以平衡夏冬兩季果實產量不平均的問題也更能穩定價格。\n\
-        在台灣擁有20幾座成功農場經驗的清華大學電機系的協助下,大龍王的種植技術以及AI的應用,讓大龍王農場受到東南亞政府的青睞,成為台灣首座打進印尼生產流程的智慧農場\n\
-        在東北亞地區幾乎沒有熱帶水果種植地,因此火龍果幾乎是供不應求的,而台灣所生產的火龍果無論是在品質以及口感在主要的東南亞生產區中遙遙領先。\n\
-        未來談到大龍王火龍果園不單只是精品水果的產地,更是將台灣的水果揚名國際的品牌。",
+        "ドラゴンフルーツは英語でpitaya（ピタヤ）、漢字で火龍果と表記されます。\
+        熱帯アメリカでは数属のサボテン類を総称してピタヤといい、その中の果実で竜のうろこのような果皮をしているものをドラゴンフルーツと呼びます。乾燥地帯のサボテンとは違い、ジャングルで木に抱きつくように伸びるつる植物の習性を持つ柱サボテンの一種です。\
+        実の大きさは10～15センチほどで大人の手のひらサイズ。皮は食べず、果肉と果肉の中に散らばっている黒ごまのような種子を食べます。\
+        果肉はやわらかくサクっとした食感、さっぱりとした甘さで酸味は少なく果汁が多い。種子はシャリシャリとした歯ざわりがします。100gあたり50kcal、1個（約260g）あたりでは約130kcalとカロリーも低く、ヘルシーな果物にもかかわらずスーパーフードとよばれるくらい栄養が豊富です。",
       farmName: "台鼎龍蝦芒果農場",
       farmPhoto: require("../img/mango-farm.jpg").default,
       farmText:
